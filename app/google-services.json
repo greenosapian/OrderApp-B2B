@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "373516858336",
+    "project_id": "greenosapian-d9657",
+    "storage_bucket": "greenosapian-d9657.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:373516858336:android:4d669915a385f7f8663185",
+        "android_client_info": {
+          "package_name": "com.example.greenosapian"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "373516858336-dimvevliccf1tbld8emdrfri2g8ofslc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.greenosapian",
+            "certificate_hash": "e4f38e2e4a6c6c522512be01cb6fc4a8f2f72bb5"
+          }
+        },
+        {
+          "client_id": "373516858336-2rbmrl9bd3f4f7gcv0pinit09238spr2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHg76Az5tIAUzIx7Aq77QuUtRD1OZ9PqI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "373516858336-2rbmrl9bd3f4f7gcv0pinit09238spr2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

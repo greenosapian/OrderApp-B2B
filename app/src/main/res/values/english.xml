@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="verification">Verification</string>
+    <string name="verification_hint">We will send you an <b>One Time Password</b> on your phone number.</string>
+    <string name="get_otp">Get OTP</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="sign_up_image">sign_up_image</string>
+    <string name="submit_otp">Submit OTP</string>
+    <string name="didnt_receive_this_code">Didn\'t receive this code?  </string>
+    <string name="resend_otp">Resend OTP</string>
+    <string name="resend_otp_in">Resend OTP in</string>
+
+</resources>
