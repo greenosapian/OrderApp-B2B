@@ -86,7 +86,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/centre"
             app:layout_constraintTop_toBottomOf="@+id/textView8"
-            tools:visibility="gone">
+            tools:visibility="visible">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/phoneNumberTF"
@@ -110,9 +110,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:digits="0123456789"
+                    android:text="@={viewmodel.phoneNumber}"
                     android:inputType="phone"
-                    android:maxLength="10"
-                    android:text="@={viewmodel.phoneNumber}" />
+                    android:maxLength="10" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -121,10 +121,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:onClick="@{()->viewmodel.onSubmitPhoneNumber()}"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
                 android:text="@string/get_otp"
+                android:onClick="@{()->viewmodel.onSubmitPhoneNumber()}"
                 android:textSize="20sp"
                 app:cornerRadius="15dp"
                 app:layout_constraintEnd_toEndOf="@+id/phoneNumberTF"
@@ -141,7 +141,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/centre"
             app:layout_constraintTop_toBottomOf="@+id/textView8"
-            tools:visibility="visible">
+            tools:visibility="gone">
 
             <com.example.greenosapian.custom_view.OtpEditText
                 android:id="@+id/otpEditText"
@@ -166,11 +166,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:onClick="@{()->viewmodel.onSubmitOtp()}"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
                 android:text="@string/submit_otp"
                 android:textSize="20sp"
+                android:onClick="@{()->viewmodel.onSubmitOtp()}"
                 app:cornerRadius="15dp"
                 app:layout_constraintEnd_toEndOf="@+id/otpEditText"
                 app:layout_constraintHorizontal_bias="0.0"
