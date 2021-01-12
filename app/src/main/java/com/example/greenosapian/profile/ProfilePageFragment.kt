@@ -1,61 +1,119 @@
 package com.example.greenosapian.profile
 
-import android.net.Uri
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.ViewModelProvider
 import com.example.greenosapian.R
 import com.example.greenosapian.databinding.FragmentProfilePageBinding
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.auth.ktx.userProfileChangeRequest
-import com.google.firebase.ktx.Firebase
+import com.example.greenosapian.network.User
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 
 class ProfilePageFragment : Fragment() {
-    private val TAG = "ProfilePageFragment"
     private lateinit var binding: FragmentProfilePageBinding
+    lateinit var viewModel: ProfilePageViewModel
+    private var location: Location? = null
 
+    companion object {
+        const val TAG = "EmbedFragment"
+        const val PICK_PROFILE_IMAGE = 1
+        const val LOCATION_PERMISSION_CODE = 2
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile_page, container, false)
-        // Inflate the layout for this fragment
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_profile_page, container, false)
 
-        binding.profileSubmitButton.setOnClickListener{
-            submitProfile()
+
+        viewModel = ViewModelProvider(this).get(ProfilePageViewModel::class.java)
+        binding.viewmodel = viewModel
+
+        binding.submitButton.setOnClickListener {
+            onSubmit()
         }
+        binding.profilePicIV.setOnClickListener {
+            pickProfilePic()
+        }
+
+        getLocation()
+
+        binding.lifecycleOwner = this
         return binding.root
     }
 
-    fun submitProfile(){
-        val userName = binding.userNameET.text.toString().toUpperCase()
-        if(userName.length == 0){
-            Toast.makeText(context, "User Name cannot be empty", Toast.LENGTH_SHORT).show()
+    private fun onSubmit() {
+        val name = binding.nameET.text.toString()
+        val address = binding.addressET.text.toString()
+
+        binding.nameTF.error = null
+        binding.addressTF.error = null
+
+        if (name.isEmpty()) {
+            binding.nameTF.error = getString(R.string.required_field)
+            return
+        } else if (address.isEmpty()) {
+            binding.addressTF.error = getString(R.string.required_field)
+            return
+        } else if (location == null) {
+            getLocation()
             return
         }
 
-        val user = Firebase.auth.currentUser
+        viewModel.insertUser(name, address, location!!)
+    }
 
-        val profileUpdates = userProfileChangeRequest {
-            displayName = userName
+    private fun getLocation() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (context?.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                //get location here
+                LocationServices.getFusedLocationProviderClient(requireActivity())
+                    .lastLocation.addOnSuccessListener {
+                        location = it
+                        Log.i(TAG, "location: $it")
+                    }.addOnFailureListener {
+                        Log.i(TAG, it.toString())
+                    }
+            } else {
+                requestPermissions(
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    LOCATION_PERMISSION_CODE
+                )
+            }
         }
+    }
 
-        user!!.updateProfile(profileUpdates)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Log.d(TAG, "User profile updated.")
-                    this.findNavController().navigate(ProfilePageFragmentDirections.actionProfilePageFragmentToHomePageFragment())
-                } else{
-                    Log.d(TAG, "user profile updating failure")
+    private fun pickProfilePic() {
+        val pickIntent = Intent(
+            Intent.ACTION_PICK,
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        )
+            .setType("image/*")
+        startActivityForResult(pickIntent, PICK_PROFILE_IMAGE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (requestCode) {
+            PICK_PROFILE_IMAGE -> if (resultCode == Activity.RESULT_OK) {
+                data?.data?.let { uri ->
+                    viewModel.profilePicUri.value = uri
                 }
             }
+        }
     }
 
 }

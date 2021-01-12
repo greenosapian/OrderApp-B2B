@@ -77,7 +77,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8"
-            tools:visibility="gone">
+            tools:visibility="visible">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/phoneNumberTF"
@@ -135,7 +135,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8"
             app:layout_constraintVertical_bias="0.0"
-            tools:visibility="visible">
+            tools:visibility="gone">
 
             <com.example.greenosapian.custom_view.OtpEditText
                 android:id="@+id/otpEditText"
@@ -230,7 +230,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:visibility="gone" />
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

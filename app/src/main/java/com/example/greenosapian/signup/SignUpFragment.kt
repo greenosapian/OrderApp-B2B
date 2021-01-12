@@ -31,7 +31,7 @@ class SignUpFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sign_up, container, false)
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
 
         signUpViewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
 

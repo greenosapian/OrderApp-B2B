@@ -10,5 +10,9 @@
     <string name="resend_otp">Resend OTP</string>
     <string name="resend_otp_in">Resend OTP in</string>
     <string name="sending_otp">Sending OTP...</string>
+    <string name="name">Name</string>
+    <string name="address">Address</string>
+    <string name="submit">SUBMIT</string>
+    <string name="required_field">Required Field</string>
 
 </resources>

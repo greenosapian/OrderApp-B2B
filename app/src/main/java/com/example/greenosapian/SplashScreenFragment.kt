@@ -26,21 +26,24 @@ class SplashScreenFragment : Fragment() {
     ): View? {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_splash_screen, container, false)
-        // Inflate the layout for this fragment
 
-        chooseNextScreen();
+
+//        TODO("uncomment this")
+//        chooseNextScreen()
+        testingProfilePage()
 //        databaseTesting()
         return binding.root
+    }
+
+    private fun testingProfilePage() {
+        this.findNavController().navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToProfilePageFragment())
     }
 
     private fun databaseTesting() {
         CoroutineScope(Dispatchers.Main).launch {
             val application = requireNotNull(this@SplashScreenFragment.activity).application
             val datasource = GreenDatabase.getInstance(application).dao
-
             withContext(Dispatchers.IO) {
-//                datasource.updateUserAccount(Account("1234567890", true))
-                datasource.deleteAllUserAccounts()
 //                println("Record added successfully:")
             }
         }
@@ -53,19 +56,12 @@ class SplashScreenFragment : Fragment() {
 
         println("PhoneNo: ${currentUser?.phoneNumber}")
         println("username: ${currentUser?.displayName}")
-//        val userAccount = getUserFromDatabase()
 
         if (currentUser == null) {
             //go to signup page
             this@SplashScreenFragment.findNavController()
                 .navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToSignUpFragment())
-        }
-//        else if (currentUser.displayName.isNullOrEmpty()) {
-//            //go to profile page
-//            this@SplashScreenFragment.findNavController()
-//                .navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToProfilePageFragment())
-//        }
-        else {
+        } else {
             //go to home page
             this@SplashScreenFragment.findNavController()
                 .navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToHomePageFragment())
