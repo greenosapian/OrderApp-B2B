@@ -35,7 +35,7 @@ class ProfilePageViewModel(private val app: Application) : AndroidViewModel(app)
         _navigateToHomeFragment.value = null
     }
 
-    fun insertUser(name: String, address: String, location: Location) {
+    fun insertUser(name: String, address: String, location: Location?) {
         coroutineScope.launch {
             withContext(Dispatchers.IO) {
 
@@ -50,8 +50,8 @@ class ProfilePageViewModel(private val app: Application) : AndroidViewModel(app)
                             address,
                             phoneNumber,
                             UserLocation(
-                                location.latitude.toString(),
-                                location.longitude.toString()
+                                location?.latitude?.toString() ?: "",
+                                location?.longitude?.toString() ?: ""
                             ),
                             profilePicString
                         )

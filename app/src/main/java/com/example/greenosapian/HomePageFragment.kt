@@ -41,7 +41,7 @@ class HomePageFragment : Fragment() {
 
         binding.signOutButton.setOnClickListener{
             this@HomePageFragment.findNavController().navigate(HomePageFragmentDirections.actionHomePageFragmentToSplashScreenFragment())
-            Toast.makeText(context, "Signed Out Successfull", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Signed Out Successful", Toast.LENGTH_LONG).show()
             Firebase.auth.signOut()
         }
 

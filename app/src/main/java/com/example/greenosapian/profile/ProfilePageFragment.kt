@@ -4,12 +4,10 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Base64
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,14 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.greenosapian.R
 import com.example.greenosapian.databinding.FragmentProfilePageBinding
-import com.example.greenosapian.network.ElasticApi
-import com.example.greenosapian.network.User
-import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import kotlinx.android.synthetic.main.fragment_sign_up.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class ProfilePageFragment : Fragment() {
     private lateinit var binding: FragmentProfilePageBinding
@@ -36,7 +27,7 @@ class ProfilePageFragment : Fragment() {
     private var location: Location? = null
 
     companion object {
-        const val TAG = "EmbedFragment"
+        const val TAG = "@ProfilePageFragment"
         const val PICK_PROFILE_IMAGE = 1
         const val LOCATION_PERMISSION_CODE = 2
     }
@@ -85,18 +76,15 @@ class ProfilePageFragment : Fragment() {
         } else if (address.isEmpty()) {
             binding.addressTF.error = getString(R.string.required_field)
             return
-        } else if (location == null) {
-            getLocation()
-            return
         }
 
-        viewModel.insertUser(name, address, location!!)
+        viewModel.insertUser(name, address, location)
     }
 
 
     private fun getLocation() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (context?.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            if (context?.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 //get location here
                 LocationServices.getFusedLocationProviderClient(requireActivity())
                     .lastLocation.addOnSuccessListener {
@@ -107,7 +95,7 @@ class ProfilePageFragment : Fragment() {
                     }
             } else {
                 requestPermissions(
-                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
                     LOCATION_PERMISSION_CODE
                 )
             }

@@ -14,25 +14,18 @@ import androidx.navigation.fragment.findNavController
 import com.example.greenosapian.R
 import com.example.greenosapian.databinding.FragmentSignUpBinding
 import com.example.greenosapian.doesUserExist
-import com.example.greenosapian.network.ElasticApi
-import com.google.firebase.FirebaseException
-import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
-import retrofit2.Retrofit
-import java.lang.Exception
 import java.util.concurrent.TimeUnit
 
 class SignUpFragment : Fragment() {
     private val TAG = "SignUpFragment"
     private lateinit var binding: FragmentSignUpBinding
-    lateinit var signUpViewModel: SignUpViewModel
+    lateinit var viewModel: SignUpViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,58 +34,63 @@ class SignUpFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sign_up, container, false)
         binding.lifecycleOwner = this
 
-        signUpViewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
 
         setupViewModelObservers()
-        binding.viewmodel = signUpViewModel
+        binding.viewmodel = viewModel
         binding.submitOTPButton.isEnabled = false
         return binding.root
     }
 
     private fun setupViewModelObservers() {
-        signUpViewModel.phoneNumberError.observe(viewLifecycleOwner, Observer {
+        viewModel.phoneNumberError.observe(viewLifecycleOwner, Observer {
             it?.let {
                 binding.phoneNumberTF.error = it
             }
         })
 
-        signUpViewModel.phoneNumber.observe(viewLifecycleOwner, Observer {
+        viewModel.phoneNumber.observe(viewLifecycleOwner, Observer {
             it?.let {
                 binding.phoneNumberTF.error = null
             }
         })
 
-        signUpViewModel.otp.observe(viewLifecycleOwner, Observer {
+        viewModel.otp.observe(viewLifecycleOwner, Observer {
             it?.let {
                 binding.submitOTPButton.isEnabled = it.length >= 6
             }
         })
 
-        signUpViewModel.credential.observe(viewLifecycleOwner, Observer {
+        viewModel.credential.observe(viewLifecycleOwner, Observer {
             it?.let {
                 signInWithPhoneAuthCredential(it)
-                signUpViewModel.signInWithCredentialsComplete()
+                viewModel.signInWithCredentialsComplete()
+            }
+        })
+        viewModel.isSubmitOtpButtonEnabled.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                binding.submitOTPButton.isEnabled = it
             }
         })
 
         //refactor to signle-event live-data
-        signUpViewModel.submitPhoneNumber.observe(viewLifecycleOwner, Observer {
+        viewModel.submitPhoneNumber.observe(viewLifecycleOwner, Observer {
             it?.let {
                 submitPhoneNumber(
-                    signUpViewModel.getPhoneNumber(),
-                    signUpViewModel.getFirebaseAuthCallbacks()
+                    viewModel.getPhoneNumber(),
+                    viewModel.getFirebaseAuthCallbacks()
                 )
-                signUpViewModel.phoneNumberSubmitted()
+                viewModel.phoneNumberSubmitted()
             }
         })
-        signUpViewModel.resendOtp.observe(viewLifecycleOwner, Observer {
+        viewModel.resendOtp.observe(viewLifecycleOwner, Observer {
             it?.let {
                 resendVerificationCode(
-                    signUpViewModel.getPhoneNumber(),
-                    signUpViewModel.getResendToken(),
-                    signUpViewModel.getFirebaseAuthCallbacks()
+                    viewModel.getPhoneNumber(),
+                    viewModel.getResendToken(),
+                    viewModel.getFirebaseAuthCallbacks()
                 )
-                signUpViewModel.otpResent()
+                viewModel.otpResent()
             }
         })
     }
@@ -137,6 +135,7 @@ class SignUpFragment : Fragment() {
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
                         // The verification code entered was invalid
+                        binding.submitOTPButton.isEnabled = true
                         Toast.makeText(context, "Invalid OTP", Toast.LENGTH_SHORT).show()
                     }
                 }

@@ -60,6 +60,9 @@ class SignUpViewModel : ViewModel() {
     val resendOtp: LiveData<Boolean>
         get() = _resendOtp
 
+    private val _isSubmitOtpButtonEnabled = MutableLiveData<Boolean>()
+    val isSubmitOtpButtonEnabled: LiveData<Boolean>
+        get() = _isSubmitOtpButtonEnabled
 
     init {
         callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -81,7 +84,7 @@ class SignUpViewModel : ViewModel() {
                 // This callback is invoked in an invalid request for verification is made,
                 // for instance if the the phone number format is not valid.
                 Log.w(SignUpViewModel.TAG, "onVerificationFailed", e)
-
+//                _isSubmitOtpButtonEnabled.value = true
                 if (e is FirebaseAuthInvalidCredentialsException) {
                     // Invalid request
                     // ...
@@ -103,6 +106,7 @@ class SignUpViewModel : ViewModel() {
                 storedVerificationId = verificationId
                 resendToken = token
                 resendOtpTimer.start()
+                _isSubmitOtpButtonEnabled.value = true
             }
         }//@callback
 
@@ -117,6 +121,7 @@ class SignUpViewModel : ViewModel() {
         }//@countDownTimer
 
         _resendOtpTimerText.value = "60"
+        _isSubmitOtpButtonEnabled.value = false
     }
 
     fun getFirebaseAuthCallbacks() = callbacks
@@ -140,9 +145,11 @@ class SignUpViewModel : ViewModel() {
     }
 
     fun onSubmitOtp() {
+
         try {
             _credential.value =
                 PhoneAuthProvider.getCredential(storedVerificationId!!, otp.value.toString())
+            _isSubmitOtpButtonEnabled.value = false
         } catch (e: Exception) {
             e.printStackTrace()
             _credential.value = null
@@ -151,6 +158,7 @@ class SignUpViewModel : ViewModel() {
 
     fun onResendOtp() {
         _resendOtp.value = true
+        _isSubmitOtpButtonEnabled.value = false
     }
 
     fun otpResent() {
