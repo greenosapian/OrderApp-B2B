@@ -28,8 +28,11 @@ interface ElasticApiService {
     suspend fun getUser(@Path(value = "user_id") userId: String) : User
 
     @Headers("Content-Type: application/json")
-    @POST("users")
-    suspend fun insertUser(@Body user: User):NetworkResponse
+    @POST("users/{user_id}")
+    suspend fun insertUser(@Path(value = "user_id") userId: String, @Body user: User):NetworkResponse
+
+    @DELETE("users/{user_id}")
+    suspend fun deleteUser(@Path(value = "user_id") userId: String):NetworkResponse
 }
 
 object ElasticApi {

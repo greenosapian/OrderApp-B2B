@@ -10,12 +10,15 @@ import androidx.navigation.fragment.findNavController
 import com.example.greenosapian.database.Account
 import com.example.greenosapian.database.GreenDatabase
 import com.example.greenosapian.databinding.FragmentSplashScreenBinding
+import com.example.greenosapian.network.ElasticApi
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
+import retrofit2.Retrofit
 
 
 class SplashScreenFragment : Fragment() {
@@ -28,53 +31,23 @@ class SplashScreenFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_splash_screen, container, false)
 
 
-//        TODO("uncomment this")
-//        chooseNextScreen()
-        testingProfilePage()
+        chooseNextScreen()
+//        testingProfilePage()
 //        databaseTesting()
         return binding.root
     }
 
-    private fun testingProfilePage() {
-        this.findNavController().navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToProfilePageFragment())
-    }
-
-    private fun databaseTesting() {
-        CoroutineScope(Dispatchers.Main).launch {
-            val application = requireNotNull(this@SplashScreenFragment.activity).application
-            val datasource = GreenDatabase.getInstance(application).dao
-            withContext(Dispatchers.IO) {
-//                println("Record added successfully:")
-            }
-        }
-    }
-
     //choosing next fragment based on whether user have registered or not
     private fun chooseNextScreen() {
-        val currentUser = Firebase.auth.currentUser
-        println("CurrentUser: $currentUser")
-
-        println("PhoneNo: ${currentUser?.phoneNumber}")
-        println("username: ${currentUser?.displayName}")
-
-        if (currentUser == null) {
-            //go to signup page
-            this@SplashScreenFragment.findNavController()
-                .navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToSignUpFragment())
-        } else {
-            //go to home page
-            this@SplashScreenFragment.findNavController()
-                .navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToHomePageFragment())
+        CoroutineScope(Dispatchers.Main).launch {
+            val phoneNumber = Firebase.auth.currentUser?.phoneNumber
+            if (!phoneNumber.isNullOrEmpty() && doesUserExist(phoneNumber)) {
+                this@SplashScreenFragment.findNavController()
+                    .navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToHomePageFragment(phoneNumber))
+            } else {
+                this@SplashScreenFragment.findNavController()
+                    .navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToSignUpFragment())
+            }
         }
-    }
-
-    private suspend fun getUserFromDatabase(): Account? {
-        val application = requireNotNull(this.activity).application
-        val datasource = GreenDatabase.getInstance(application).dao
-        var userAccount: Account? = null
-        withContext(Dispatchers.IO) {
-            userAccount = datasource.getUserAccount()
-        }
-        return userAccount
     }
 }

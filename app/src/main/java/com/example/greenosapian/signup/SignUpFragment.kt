@@ -13,11 +13,19 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.greenosapian.R
 import com.example.greenosapian.databinding.FragmentSignUpBinding
+import com.example.greenosapian.doesUserExist
+import com.example.greenosapian.network.ElasticApi
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import retrofit2.Retrofit
 import java.lang.Exception
 import java.util.concurrent.TimeUnit
 
@@ -123,16 +131,7 @@ class SignUpFragment : Fragment() {
             .addOnCompleteListener(this.requireActivity()) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithCredential:success")
-
-                    val username = Firebase.auth.currentUser?.displayName
-                    if (username.isNullOrEmpty()) {
-                        this.findNavController()
-                            .navigate(SignUpFragmentDirections.actionSignUpFragmentToProfilePageFragment())
-                    } else {
-                        this.findNavController()
-                            .navigate(SignUpFragmentDirections.actionSignUpFragmentToHomePageFragment())
-                    }
+                    selectNextScreen()
                 } else {
                     // Sign in failed, display a message and update the UI
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
@@ -142,5 +141,18 @@ class SignUpFragment : Fragment() {
                     }
                 }
             }
+    }
+
+    private fun selectNextScreen() {
+        CoroutineScope(Dispatchers.Main).launch {
+            val phoneNumber = Firebase.auth.currentUser?.phoneNumber
+            if (!phoneNumber.isNullOrBlank() && doesUserExist(phoneNumber)) {
+                this@SignUpFragment.findNavController()
+                    .navigate(SignUpFragmentDirections.actionSignUpFragmentToHomePageFragment(phoneNumber))
+            } else {
+                this@SignUpFragment.findNavController()
+                    .navigate(SignUpFragmentDirections.actionSignUpFragmentToProfilePageFragment())
+            }
+        }
     }
 }

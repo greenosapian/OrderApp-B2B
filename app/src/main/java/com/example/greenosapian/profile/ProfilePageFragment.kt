@@ -4,22 +4,31 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Base64
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.greenosapian.R
 import com.example.greenosapian.databinding.FragmentProfilePageBinding
+import com.example.greenosapian.network.ElasticApi
 import com.example.greenosapian.network.User
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import kotlinx.android.synthetic.main.fragment_sign_up.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ProfilePageFragment : Fragment() {
     private lateinit var binding: FragmentProfilePageBinding
@@ -52,6 +61,13 @@ class ProfilePageFragment : Fragment() {
 
         getLocation()
 
+        viewModel.navigateToHomeFragment.observe(viewLifecycleOwner, Observer {
+            it?.let { userPhoneNumber->
+                this.findNavController().navigate(ProfilePageFragmentDirections.actionProfilePageFragmentToHomePageFragment(userPhoneNumber))
+                viewModel.navigationToHomeFragmentComplete()
+            }
+        })
+
         binding.lifecycleOwner = this
         return binding.root
     }
@@ -76,6 +92,7 @@ class ProfilePageFragment : Fragment() {
 
         viewModel.insertUser(name, address, location!!)
     }
+
 
     private fun getLocation() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
