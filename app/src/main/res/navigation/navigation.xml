@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/homePageFragment"
-        android:name="com.example.greenosapian.HomePageFragment"
+        android:name="com.example.greenosapian.homepage.HomePageFragment"
         tools:layout="@layout/fragment_home_page"
         android:label="HomePageFragment" >
         <action
