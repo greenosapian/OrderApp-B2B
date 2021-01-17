@@ -10,7 +10,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.*
 
-private const val BASE_URL = "http://54.91.137.181:9200/test003/"
+private const val BASE_URL = "http://54.91.137.181:9200/"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -24,15 +24,19 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface ElasticApiService {
-    @GET("users/{user_id}/_source")
+    @GET("test003/users/{user_id}/_source")
     suspend fun getUser(@Path(value = "user_id") userId: String) : User
 
     @Headers("Content-Type: application/json")
-    @POST("users/{user_id}")
+    @POST("test003/users/{user_id}")
     suspend fun insertUser(@Path(value = "user_id") userId: String, @Body user: User):NetworkResponse
 
-    @DELETE("users/{user_id}")
+    @DELETE("test003/users/{user_id}")
     suspend fun deleteUser(@Path(value = "user_id") userId: String):NetworkResponse
+
+    @GET("test-index/vegetables/_search?size=100")
+    suspend fun getVegetables():VegetablesResponse
+
 }
 
 object ElasticApi {

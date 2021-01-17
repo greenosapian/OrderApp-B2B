@@ -5,13 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.greenosapian.R
 import com.example.greenosapian.databinding.FragmentOrderListBinding
+import com.example.greenosapian.network.ElasticApi
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class OrderListFragment : Fragment() {
 
     private lateinit var binding: FragmentOrderListBinding
+    private lateinit var viewmodel:OrderListViewModel
+    private lateinit var adapter:VegieAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,8 +30,29 @@ class OrderListFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order_list, container, false)
 
+
+        viewmodel = ViewModelProvider(this).get(OrderListViewModel::class.java)
+
+        binding.viewmodel = viewmodel
+
         binding.lifecycleOwner = this
+        initRecyclerView()
+
+        viewmodel.vegies.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.submitList(it)
+            }
+        })
         return binding.root
     }
 
+    private fun initRecyclerView() {
+        adapter = VegieAdapter(
+            VegieListener {
+                Toast.makeText(this.context,"Price: ${it.value.price}",Toast.LENGTH_SHORT).show()
+            }
+        )
+
+        binding.recylerView.adapter = adapter
+    }
 }

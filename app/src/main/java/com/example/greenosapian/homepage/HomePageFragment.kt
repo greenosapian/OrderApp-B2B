@@ -29,7 +29,7 @@ class HomePageFragment : Fragment() {
             R.layout.fragment_home_page, container, false)
 
         binding.orderButton.setOnClickListener{
-            println("order button clicked")
+            findNavController().navigate(HomePageFragmentDirections.actionHomePageFragmentToOrderListFragment())
         }
 
         binding.historyButton.setOnClickListener{

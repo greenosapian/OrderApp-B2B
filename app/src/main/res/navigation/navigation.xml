@@ -48,6 +48,9 @@
         <argument
             android:name="userPhoneNumber"
             app:argType="string" />
+        <action
+            android:id="@+id/action_homePageFragment_to_orderListFragment"
+            app:destination="@id/orderListFragment" />
     </fragment>
     <fragment
         android:id="@+id/profilePageFragment"
@@ -60,4 +63,9 @@
             app:popUpTo="@id/profilePageFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/orderListFragment"
+        tools:layout="@layout/fragment_order_list"
+        android:name="com.example.greenosapian.orderlist.OrderListFragment"
+        android:label="OrderListFragment" />
 </navigation>
