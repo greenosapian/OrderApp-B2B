@@ -8,29 +8,12 @@ import com.example.greenosapian.network.NetworkVegie
 import kotlinx.coroutines.*
 import java.lang.Exception
 
-class OrderListViewModel :ViewModel(){
+class OrderListViewModel(repository: OrderRepository) :ViewModel(){
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private val _vegies = MutableLiveData<List<NetworkVegie>>()
-    val vegies:LiveData<List<NetworkVegie>>
-        get() = _vegies
-
-    init {
-        getVegetables()
-    }
-
-    private fun getVegetables() {
-        coroutineScope.launch {
-            try {
-                _vegies.value = ElasticApi.retrofitService.getVegetables().outerHits.vegies
-            }
-            catch (e:Exception){
-                println(e)
-            }
-        }
-    }
+    val veggies = repository.getVegetableList()
 
     override fun onCleared() {
         super.onCleared()

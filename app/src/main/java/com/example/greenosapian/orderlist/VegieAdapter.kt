@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.greenosapian.database.Vegie
 import com.example.greenosapian.databinding.ListItemVegieBinding
-import com.example.greenosapian.network.NetworkVegie
 
 class VegieAdapter(val clickListener: VegieListener) :
-    ListAdapter<NetworkVegie, VegieAdapter.ViewHolder>(VegieDiffCallback()) {
+    ListAdapter<Vegie, VegieAdapter.ViewHolder>(VegieDiffCallback()) {
 
     //how to create
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,8 +23,8 @@ class VegieAdapter(val clickListener: VegieListener) :
     }
 
     class ViewHolder(val binding: ListItemVegieBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: NetworkVegie, clickListener: VegieListener) {
-            binding.networkVegie = item
+        fun bind(item: Vegie, clickListener: VegieListener) {
+            binding.vegie = item
             binding.clickListener = clickListener
             binding.executePendingBindings()
         }
@@ -39,16 +39,16 @@ class VegieAdapter(val clickListener: VegieListener) :
     }
 }
 
-class VegieDiffCallback : DiffUtil.ItemCallback<NetworkVegie>() {
-    override fun areItemsTheSame(oldItem: NetworkVegie, newItem: NetworkVegie): Boolean {
+class VegieDiffCallback : DiffUtil.ItemCallback<Vegie>() {
+    override fun areItemsTheSame(oldItem: Vegie, newItem: Vegie): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: NetworkVegie, newItem: NetworkVegie): Boolean {
+    override fun areContentsTheSame(oldItem: Vegie, newItem: Vegie): Boolean {
         return oldItem == newItem
     }
 }
 
-class VegieListener(val clickListener: (vegie: NetworkVegie) -> Unit) {
-    fun onClick(networkVegie: NetworkVegie) = clickListener(networkVegie)
+class VegieListener(val clickListener: (vegie: Vegie) -> Unit) {
+    fun onClick(networkVegie: Vegie) = clickListener(networkVegie)
 }

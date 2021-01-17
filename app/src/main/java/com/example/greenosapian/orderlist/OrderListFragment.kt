@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.greenosapian.R
+import com.example.greenosapian.database.GreenDatabase
 import com.example.greenosapian.databinding.FragmentOrderListBinding
 import com.example.greenosapian.network.ElasticApi
 import kotlinx.coroutines.CoroutineScope
@@ -30,15 +31,20 @@ class OrderListFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order_list, container, false)
 
+        val application = requireNotNull(this.activity).application
+        val repository = OrderRepository(GreenDatabase.getInstance(application).dao)
+        val viewModelFactory =
+            OrderListViewModelFactory(repository)
 
-        viewmodel = ViewModelProvider(this).get(OrderListViewModel::class.java)
+        viewmodel = ViewModelProvider(this, viewModelFactory).get(OrderListViewModel::class.java)
+
 
         binding.viewmodel = viewmodel
 
         binding.lifecycleOwner = this
         initRecyclerView()
 
-        viewmodel.vegies.observe(viewLifecycleOwner, Observer {
+        viewmodel.veggies.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
             }
@@ -49,7 +55,7 @@ class OrderListFragment : Fragment() {
     private fun initRecyclerView() {
         adapter = VegieAdapter(
             VegieListener {
-                Toast.makeText(this.context,"Price: ${it.value.price}",Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this.context,"Price: ${it.value.price}",Toast.LENGTH_SHORT).show()
             }
         )
 

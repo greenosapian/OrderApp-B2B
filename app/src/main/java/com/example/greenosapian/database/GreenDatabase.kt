@@ -5,8 +5,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Account::class],
-    version = 2,
+@Database(entities = [Vegie::class],
+    version = 3,
     exportSchema = false)
 abstract class GreenDatabase: RoomDatabase() {
 
