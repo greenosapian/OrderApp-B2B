@@ -24,7 +24,7 @@ class VegieAdapter(val clickListener: VegieListener) :
 
     class ViewHolder(val binding: ListItemVegieBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Vegie, clickListener: VegieListener) {
-            binding.vegie = item
+            binding.veggie = item
             binding.clickListener = clickListener
             binding.executePendingBindings()
         }
@@ -49,6 +49,12 @@ class VegieDiffCallback : DiffUtil.ItemCallback<Vegie>() {
     }
 }
 
-class VegieListener(val clickListener: (vegie: Vegie) -> Unit) {
-    fun onClick(networkVegie: Vegie) = clickListener(networkVegie)
+class VegieListener(val addButtonListener: (vegie: Vegie) -> Unit,
+                    val removeButtonlistener: (vegie: Vegie) -> Unit,
+                    val changeQuantity: (vegie: Vegie, stepValue:Int) -> Unit
+) {
+    fun onAddClicked(vegie: Vegie) = addButtonListener(vegie)
+    fun onRemovedClick(vegie: Vegie) = removeButtonlistener(vegie)
+    fun increaseQuantity(vegie: Vegie) = changeQuantity(vegie, 1)
+    fun decreaseQuantity(vegie: Vegie) = changeQuantity(vegie, -1)
 }

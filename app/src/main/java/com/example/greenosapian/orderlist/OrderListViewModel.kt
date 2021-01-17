@@ -1,23 +1,47 @@
 package com.example.greenosapian.orderlist
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.greenosapian.network.ElasticApi
-import com.example.greenosapian.network.NetworkVegie
+import com.example.greenosapian.database.Dao
+import com.example.greenosapian.database.Vegie
 import kotlinx.coroutines.*
-import java.lang.Exception
 
-class OrderListViewModel(repository: OrderRepository) :ViewModel(){
+class OrderListViewModel(private val dao: Dao) :ViewModel(){
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    private val repository = OrderRepository(dao)
 
     val veggies = repository.getVegetableList()
+
+    fun addVeggieInCart(veggie: Vegie){
+        coroutineScope.launch {
+            repository.updateVeggieQuantity(veggie.id, 1)
+
+        }
+    }
+
+    fun removeVeggieFromCart(veggie: Vegie){
+        coroutineScope.launch {
+            repository.updateVeggieQuantity(veggie.id, 0)
+        }
+    }
+
+    fun changeVeggieQuantity(veggie: Vegie, step:Int){
+        coroutineScope.launch {
+            when(step){
+                1->{
+                    repository.increaseQuantity(veggie.id)
+                }
+                -1->{
+                    repository.decreaseQuantity(veggie.id)
+                }
+            }
+
+        }
+    }
 
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
     }
-
 }

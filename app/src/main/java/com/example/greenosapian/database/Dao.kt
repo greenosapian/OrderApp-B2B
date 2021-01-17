@@ -1,10 +1,8 @@
 package com.example.greenosapian.database
 
 import androidx.lifecycle.LiveData
+import androidx.room.*
 import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
 
 @Dao
 interface Dao {
@@ -22,6 +20,18 @@ interface Dao {
     @Insert
     fun insertVeggie(vegetableList: List<Vegie>)
 
+    @Query("UPDATE vegetables SET quantity=:quantity WHERE id=:id")
+    fun updateVeggieQuantity(id :String, quantity: Int)
+
+    @Query("UPDATE vegetables SET quantity = quantity+1 WHERE id=:id")
+    fun increaseQuantity(id :String)
+
+    @Query("UPDATE vegetables SET quantity = quantity-1 WHERE id=:id and quantity>0")
+    fun decreaseQuantity(id :String)
+
     @Query("SELECT * FROM vegetables")
     fun getCachedVegetableList(): LiveData<List<Vegie>>
+
+    @Query("DELETE FROM vegetables")
+    fun deleteAllCachedVegetables()
 }

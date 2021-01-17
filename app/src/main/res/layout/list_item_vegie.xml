@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="vegie"
+            name="veggie"
             type="com.example.greenosapian.database.Vegie" />
 
         <variable
@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.75" />
+                app:layout_constraintGuide_percent="0.73" />
 
             <TextView
                 android:id="@+id/veggieNameTV"
@@ -72,7 +72,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
-                android:text="@{vegie.name}"
+                android:text="@{veggie.name}"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="@{String.format(@string/veggie_price, vegie.price)}"
+                android:text="@{String.format(@string/veggie_price, veggie.price)}"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -107,6 +107,7 @@
                 android:layout_marginBottom="16dp"
                 android:minWidth="0dp"
                 android:minHeight="0dp"
+                android:onClick="@{()->clickListener.onAddClicked(veggie)}"
                 android:paddingVertical="4dp"
                 android:paddingTop="0dp"
                 android:paddingBottom="0dp"
@@ -118,6 +119,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline2"
                 app:layout_constraintTop_toBottomOf="@+id/veggiePriceTV"
+                app:visibleUnlessQuantity="@{veggie.quantity}"
                 tools:visibility="visible" />
 
             <Button
@@ -128,13 +130,18 @@
                 android:layout_marginEnd="8dp"
                 android:minWidth="0dp"
                 android:minHeight="0dp"
+                android:onClick="@{()->clickListener.onRemovedClick(veggie)}"
+                android:paddingLeft="4dp"
                 android:paddingTop="0dp"
+                android:paddingRight="4dp"
                 android:paddingBottom="0dp"
                 android:text="@string/remove"
-                android:textSize="12sp"
-                android:visibility="invisible"
+                android:textSize="14sp"
+                android:visibility="visible"
                 app:backgroundTint="#FF636C"
                 app:cornerRadius="4dp"
+                app:iconPadding="0dp"
+                app:invisibleUnlessQuantity="@{veggie.quantity}"
                 app:layout_constraintBottom_toBottomOf="@id/addButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -145,6 +152,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="5dp"
+                app:invisibleUnlessQuantity="@{veggie.quantity}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toEndOf="@+id/cardView"
@@ -160,21 +168,24 @@
                         style="@style/Widget.App.Button.OutlinedButton.IconOnly"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:onClick="@{()->clickListener.decreaseQuantity(veggie)}"
                         app:icon="@drawable/ic_remove_24px"
                         app:layout_constraintBottom_toBottomOf="parent" />
 
                     <TextView
                         android:layout_width="30dp"
-                        android:textStyle="bold"
-                        android:text="@{String.valueOf(vegie.price)}"
+                        android:layout_height="wrap_content"
+                        android:text="@{String.valueOf(veggie.quantity)}"
                         android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
                         tools:text="15" />
+
                     <Button
                         style="@style/Widget.App.Button.OutlinedButton.IconOnly"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:onClick="@{()->clickListener.increaseQuantity(veggie)}"
                         app:icon="@drawable/ic_add_black_18dp" />
                 </LinearLayout>
 
