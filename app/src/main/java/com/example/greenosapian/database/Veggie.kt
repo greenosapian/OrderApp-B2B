@@ -13,11 +13,11 @@ data class Vegie(
     val name:String,
 
     @ColumnInfo(name = "price")
-    val price:Long,
+    var price:Long,
 
     @ColumnInfo(name = "quantity")
-    val quantity:Int = 0,
+    var quantity:Int = 0,
 
     @ColumnInfo(name = "image_url")
-    val imageUrl: String?
+    var imageUrl: String?
 )

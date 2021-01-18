@@ -15,7 +15,7 @@ class OrderListViewModel(private val repository: OrderRepository) :ViewModel(){
     fun addVeggieInCart(veggie: Vegie){
         coroutineScope.launch {
             repository.updateVeggieQuantity(veggie.id, 1)
-
+//            println("added")
         }
     }
 
