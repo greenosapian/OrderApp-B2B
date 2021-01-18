@@ -9,6 +9,7 @@ class MainActivity : AppCompatActivity() {
         // hello again..kaise hosadsadasd
         // hello from another world
         // commit from cart
+        // bas last comment
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
