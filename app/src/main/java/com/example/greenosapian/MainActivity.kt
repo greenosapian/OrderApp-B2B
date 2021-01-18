@@ -9,6 +9,7 @@ class MainActivity : AppCompatActivity() {
         // hello again..kaise hosadsadasd
         // hello from another world
         // Another thing
+        // hey wassup
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
