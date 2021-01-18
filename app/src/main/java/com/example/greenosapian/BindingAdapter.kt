@@ -30,8 +30,8 @@ fun bindImage(imgView: ImageView, imgUrl: Uri?) {
     }
 }
 
-@BindingAdapter("imageUrl")
-fun bindImage(imgView: ImageView, imgUrl:String?) {
+@BindingAdapter("imageInternetUrl")
+fun bindImageFromInternet(imgView: ImageView, imgUrl:String?) {
     imgUrl?.let {
         val imgUri = it.toUri().buildUpon().scheme("https").build()
         Glide.with(imgView.context)

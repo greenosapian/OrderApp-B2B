@@ -49,6 +49,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="0dp"
+                    app:imageInternetUrl="@{veggie.imageUrl}"
                     android:layout_marginTop="0dp"
                     android:layout_marginBottom="0dp"
                     app:layout_constraintBottom_toBottomOf="parent"
