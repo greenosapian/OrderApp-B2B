@@ -5,11 +5,10 @@ import com.example.greenosapian.database.Dao
 import com.example.greenosapian.database.Vegie
 import kotlinx.coroutines.*
 
-class OrderListViewModel(private val dao: Dao) :ViewModel(){
+class OrderListViewModel(private val repository: OrderRepository) :ViewModel(){
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    private val repository = OrderRepository(dao)
 
     val veggies = repository.getVegetableList()
 

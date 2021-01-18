@@ -11,6 +11,7 @@ import com.example.greenosapian.database.Account
 import com.example.greenosapian.database.GreenDatabase
 import com.example.greenosapian.databinding.FragmentSplashScreenBinding
 import com.example.greenosapian.network.ElasticApi
+import com.example.greenosapian.orderlist.OrderRepository
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
@@ -31,10 +32,19 @@ class SplashScreenFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_splash_screen, container, false)
 
 
+        deleteCache()
+
         chooseNextScreen()
 //        testingProfilePage()
 //        databaseTesting()
         return binding.root
+    }
+
+    private fun deleteCache() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val application = requireNotNull(this@SplashScreenFragment.activity).application
+            GreenDatabase.getInstance(application).dao.deleteAllCachedVegetables()
+        }
     }
 
     //choosing next fragment based on whether user have registered or not

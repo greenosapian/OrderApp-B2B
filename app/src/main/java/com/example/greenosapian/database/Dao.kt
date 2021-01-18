@@ -34,4 +34,7 @@ interface Dao {
 
     @Query("DELETE FROM vegetables")
     fun deleteAllCachedVegetables()
+
+    @Query("SELECT COUNT(*) FROM vegetables")
+    fun getVegetableCount():Long
 }

@@ -33,8 +33,9 @@ class OrderListFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order_list, container, false)
 
         val application = requireNotNull(this.activity).application
+        val repository = OrderRepository(GreenDatabase.getInstance(application).dao)
         val viewModelFactory =
-            OrderListViewModelFactory(GreenDatabase.getInstance(application).dao)
+            OrderListViewModelFactory(repository)
 
         viewmodel = ViewModelProvider(this, viewModelFactory).get(OrderListViewModel::class.java)
 
