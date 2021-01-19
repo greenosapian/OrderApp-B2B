@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,11 +13,6 @@ import com.example.greenosapian.R
 import com.example.greenosapian.database.GreenDatabase
 import com.example.greenosapian.database.Vegie
 import com.example.greenosapian.databinding.FragmentOrderListBinding
-import com.example.greenosapian.network.ElasticApi
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.lang.Exception
 
 class OrderListFragment : Fragment() {
 

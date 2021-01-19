@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.example.greenosapian.R
 import com.example.greenosapian.database.GreenDatabase
 import com.example.greenosapian.database.Vegie
@@ -16,8 +18,8 @@ import com.example.greenosapian.orderlist.*
 
 class CartFragment : Fragment() {
     private lateinit var binding: FragmentCartBinding
-    private lateinit var viewmodel: CartViewModel
-    private lateinit var adapter: VegieAdapter
+    protected lateinit var viewmodel: CartViewModel
+    protected lateinit var adapter: VegieAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,6 +68,28 @@ class CartFragment : Fragment() {
         )
 
         binding.recylerView.adapter = adapter
+
+        //swipe to remove from cart
+        val itemTouchHelperCallback = object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT.or(ItemTouchHelper.RIGHT)) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return true//To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+//                Log.i("@TaskAdapter", "onSwiped : ${adapter.getItemFromAdapter(position)}")
+//                viewModel.re(adapter.getItemFromAdapter(position))
+
+                viewmodel.removeVeggieFromCart(adapter.getItemFromAdapter(position))
+            }
+        }
+
+        ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(binding.recylerView)
     }
 
 }

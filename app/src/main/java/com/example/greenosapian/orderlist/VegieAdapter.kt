@@ -12,6 +12,9 @@ import com.example.greenosapian.databinding.ListItemVegieBinding
 class VegieAdapter(val clickListener: VegieListener) :
     ListAdapter<Vegie, VegieAdapter.ViewHolder>(VegieDiffCallback()) {
 
+
+    fun getItemFromAdapter(position: Int):Vegie? = getItem(position)
+
     //how to create
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
@@ -21,7 +24,6 @@ class VegieAdapter(val clickListener: VegieListener) :
         val item = getItem(position)
         holder.bind(item, clickListener)
     }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int, payloads: MutableList<Any>) {
         val item = getItem(position)
         holder.bind(item, clickListener, payloads)

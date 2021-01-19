@@ -2,7 +2,6 @@ package com.example.greenosapian.orderlist
 
 import androidx.lifecycle.ViewModel
 import com.example.greenosapian.database.CartItem
-import com.example.greenosapian.database.Dao
 import com.example.greenosapian.database.Vegie
 import kotlinx.coroutines.*
 
@@ -20,10 +19,12 @@ open class OrderListViewModel(private val repository: OrderRepository) : ViewMod
         }
     }
 
-    fun removeVeggieFromCart(veggie: Vegie) {
+    fun removeVeggieFromCart(veggie: Vegie?) {
         coroutineScope.launch {
-            repository.updateVeggieQuantity(veggie.id, 0)
-            repository.removeCartItem(CartItem(veggie.id))
+            veggie?.let {
+                repository.updateVeggieQuantity(veggie.id, 0)
+                repository.removeCartItem(CartItem(veggie.id))
+            }
         }
     }
 
