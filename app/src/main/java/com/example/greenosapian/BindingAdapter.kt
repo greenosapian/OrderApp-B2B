@@ -43,3 +43,5 @@ fun bindImageFromInternet(imgView: ImageView, imgUrl:String?) {
     }
 }
 
+
+

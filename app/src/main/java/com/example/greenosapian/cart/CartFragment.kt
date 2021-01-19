@@ -1,60 +1,49 @@
-package com.example.greenosapian.orderlist
+package com.example.greenosapian.cart
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.example.greenosapian.R
 import com.example.greenosapian.database.GreenDatabase
 import com.example.greenosapian.database.Vegie
-import com.example.greenosapian.databinding.FragmentOrderListBinding
-import com.example.greenosapian.network.ElasticApi
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.lang.Exception
+import com.example.greenosapian.databinding.FragmentCartBinding
+import com.example.greenosapian.orderlist.*
 
-class OrderListFragment : Fragment() {
-
-    private lateinit var binding: FragmentOrderListBinding
-    private lateinit var viewmodel: OrderListViewModel
+class CartFragment : Fragment() {
+    private lateinit var binding: FragmentCartBinding
+    private lateinit var viewmodel: CartViewModel
     private lateinit var adapter: VegieAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order_list, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_cart, container, false)
 
         val application = requireNotNull(this.activity).application
-        val repository = OrderRepository(GreenDatabase.getInstance(application).dao)
+        val repository = CartRepository(GreenDatabase.getInstance(application).dao)
         val viewModelFactory =
-            OrderListViewModelFactory(repository)
+            CartViewModelFactory(repository)
 
-        viewmodel = ViewModelProvider(this, viewModelFactory).get(OrderListViewModel::class.java)
+        viewmodel = ViewModelProvider(this, viewModelFactory).get(CartViewModel::class.java)
 
 
         binding.viewmodel = viewmodel
 
-        binding.lifecycleOwner = this
-        initRecyclerView()
-
-        binding.proceedToCartButton.setOnClickListener {
-            findNavController().navigate(OrderListFragmentDirections.actionOrderListFragmentToCartFragment())
-        }
-
-        viewmodel.veggies.observe(viewLifecycleOwner, Observer {
+        viewmodel.cartItemList.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
             }
         })
+
+        binding.lifecycleOwner = this
+        initRecyclerView()
+
         return binding.root
     }
 
@@ -78,4 +67,5 @@ class OrderListFragment : Fragment() {
 
         binding.recylerView.adapter = adapter
     }
+
 }

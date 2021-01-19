@@ -20,6 +20,12 @@ interface Dao {
     @Insert
     fun insertVeggie(vegetableList: List<Vegie>)
 
+    @Insert
+    fun insetCartItem(cartItem: CartItem)
+
+    @Delete
+    fun removeCartItem(cartItem: CartItem)
+
     @Query("UPDATE vegetables SET quantity=:quantity WHERE id=:id")
     fun updateVeggieQuantity(id :String, quantity: Int)
 
@@ -32,9 +38,18 @@ interface Dao {
     @Query("SELECT * FROM vegetables")
     fun getCachedVegetableList(): LiveData<List<Vegie>>
 
+    @Query("SELECT * FROM vegetables WHERE id in (SELECT * FROM cart)")
+    fun getCartItems():LiveData<List<Vegie>>
+
     @Query("DELETE FROM vegetables")
     fun deleteAllCachedVegetables()
 
     @Query("SELECT COUNT(*) FROM vegetables")
     fun getVegetableCount():Long
+
+    @Query("SELECT * FROM vegetables WHERE id =:id")
+    fun getVeggie(id:String):Vegie
+
+
+
 }

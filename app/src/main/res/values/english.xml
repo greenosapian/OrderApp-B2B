@@ -20,5 +20,7 @@
     <string name="proceed_to_cart">Proceed To Cart</string>
     <string name="add">Add</string>
     <string name="remove">remove</string>
+    <string name="place_order">Place Order</string>
+    <string name="total">Total</string>
 
 </resources>
