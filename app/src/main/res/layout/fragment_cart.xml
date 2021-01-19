@@ -69,7 +69,7 @@
                 tools:text="₹499" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/placeOrderButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"

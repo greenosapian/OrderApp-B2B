@@ -44,7 +44,8 @@ class ProfilePageViewModel(private val app: Application) : AndroidViewModel(app)
                 val profilePicString: String? = getBase64FromUri(profilePicUri.value)
 
                 if (!phoneNumber.isNullOrEmpty()) {
-                    val response = ElasticApi.retrofitService.insertUser(phoneNumber,
+                    val response = ElasticApi.retrofitService.insertUser(
+                        phoneNumber,
                         User(
                             name,
                             address,
@@ -85,8 +86,7 @@ class ProfilePageViewModel(private val app: Application) : AndroidViewModel(app)
 
             BitmapFactory.decodeStream(input, null, options)?.let {
                 val byteArrayOutputStream = ByteArrayOutputStream()
-                val success =
-                    it.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream)
+                it.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream)
                 val imageBytes: ByteArray = byteArrayOutputStream.toByteArray()
                 base64String = Base64.encodeToString(imageBytes, Base64.DEFAULT)
             }
