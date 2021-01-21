@@ -3,6 +3,7 @@ package com.example.greenosapian
 import android.graphics.BitmapFactory
 import com.example.greenosapian.network.ElasticApi
 import retrofit2.HttpException
+import java.lang.Exception
 
 fun BitmapFactory.Options.calculateInSampleSize(
     reqWidth: Int,

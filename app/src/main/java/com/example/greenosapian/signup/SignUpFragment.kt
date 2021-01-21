@@ -37,6 +37,7 @@ class SignUpFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
 
         setupViewModelObservers()
+
         binding.viewmodel = viewModel
         binding.submitOTPButton.isEnabled = false
         return binding.root

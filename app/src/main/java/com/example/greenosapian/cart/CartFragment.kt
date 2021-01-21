@@ -57,21 +57,19 @@ class CartFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        adapter = VegieAdapter(
-            VegieListener(
-                //add Listener
-                {
-                    viewmodel.addVeggieInCart(it)
-                },
-                //remove Listener
-                {
-                    viewmodel.removeVeggieFromCart(it)
-                },
-                //change Quantity
-                { vegie: Vegie, step: Int ->
-                    viewmodel.changeVeggieQuantity(vegie, step)
-                }
-            )
+        adapter = VegieAdapter(object : VegieListener {
+            override fun onAddClicked(vegie: Vegie) {
+                viewmodel.addVeggieInCart(vegie)
+            }
+
+            override fun onRemovedClick(vegie: Vegie) {
+                viewmodel.removeVeggieFromCart(vegie)
+            }
+
+            override fun onQuantityChanged(vegie: Vegie, step: Int) {
+                viewmodel.changeVeggieQuantity(vegie, step)
+            }
+        }
         )
 
         binding.recylerView.adapter = adapter
@@ -89,9 +87,6 @@ class CartFragment : Fragment() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-//                Log.i("@TaskAdapter", "onSwiped : ${adapter.getItemFromAdapter(position)}")
-//                viewModel.re(adapter.getItemFromAdapter(position))
-
                 viewmodel.removeVeggieFromCart(adapter.getItemFromAdapter(position))
             }
         }

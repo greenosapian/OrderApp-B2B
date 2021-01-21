@@ -53,21 +53,19 @@ class OrderListFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        adapter = VegieAdapter(
-            VegieListener(
-                //add Listener
-                {
-                    viewmodel.addVeggieInCart(it)
-                },
-                //remove Listener
-                {
-                    viewmodel.removeVeggieFromCart(it)
-                },
-                //change Quantity
-                { vegie: Vegie, step: Int ->
-                    viewmodel.changeVeggieQuantity(vegie, step)
-                }
-            )
+        adapter = VegieAdapter(object : VegieListener {
+            override fun onAddClicked(vegie: Vegie) {
+                viewmodel.addVeggieInCart(vegie)
+            }
+
+            override fun onRemovedClick(vegie: Vegie) {
+                viewmodel.removeVeggieFromCart(vegie)
+            }
+
+            override fun onQuantityChanged(vegie: Vegie, step: Int) {
+                viewmodel.changeVeggieQuantity(vegie, step)
+            }
+        }
         )
 
         binding.recylerView.adapter = adapter

@@ -169,7 +169,7 @@
                         style="@style/Widget.App.Button.OutlinedButton.IconOnly"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:onClick="@{()->clickListener.decreaseQuantity(veggie)}"
+                        android:onClick="@{()->clickListener.onQuantityChanged(veggie, -1)}"
                         app:icon="@drawable/ic_remove_24px"
                         app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -186,7 +186,7 @@
                         style="@style/Widget.App.Button.OutlinedButton.IconOnly"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:onClick="@{()->clickListener.increaseQuantity(veggie)}"
+                        android:onClick="@{()->clickListener.onQuantityChanged(veggie,1)}"
                         app:icon="@drawable/ic_add_black_18dp" />
                 </LinearLayout>
 

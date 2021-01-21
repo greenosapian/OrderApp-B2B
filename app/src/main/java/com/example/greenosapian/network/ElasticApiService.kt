@@ -10,13 +10,13 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.*
 
-private const val BASE_URL = "http://54.91.137.181:9200/"
+private const val BASE_URL = "http://100.26.23.89:9200/"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
 
-private val retrofit = Retrofit.Builder()
+internal val retrofit = Retrofit.Builder()
     .addConverterFactory(ScalarsConverterFactory.create())
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .addConverterFactory(GsonConverterFactory.create())
@@ -36,7 +36,6 @@ interface ElasticApiService {
 
     @GET("test-index/vegetables/_search?size=100")
     suspend fun getVegetables():VegetablesResponse
-
 }
 
 object ElasticApi {

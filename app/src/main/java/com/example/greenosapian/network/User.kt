@@ -29,7 +29,6 @@ data class NetworkResponse(
     @Json(name = "_seq_no") val _seq_no: Int? = null,
     @Json(name = "_primary_term") val _primary_term: Int? = null,
     @Json(name = "_shards") val _shards: Shards? = null
-
 )
 
 data class Shards(

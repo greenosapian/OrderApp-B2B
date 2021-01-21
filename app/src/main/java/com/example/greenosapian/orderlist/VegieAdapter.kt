@@ -28,11 +28,6 @@ class VegieAdapter(val clickListener: VegieListener) :
         val item = getItem(position)
         holder.bind(item, clickListener, payloads)
     }
-//how to use
-//    override fun onBindViewHolder(holder: ViewHolder, position: Int, payloads: MutableList<Any?>) {
-//        val item = getItem(position)
-//        holder.bind(item, clickListener, payloads)
-//    }
 
     class ViewHolder(val binding: ListItemVegieBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(
@@ -104,12 +99,19 @@ class VegieDiffCallback : DiffUtil.ItemCallback<Vegie>() {
     }
 }
 
-class VegieListener(val addButtonListener: (vegie: Vegie) -> Unit,
-                    val removeButtonlistener: (vegie: Vegie) -> Unit,
-                    val changeQuantity: (vegie: Vegie, stepValue:Int) -> Unit
-) {
-    fun onAddClicked(vegie: Vegie) = addButtonListener(vegie)
-    fun onRemovedClick(vegie: Vegie) = removeButtonlistener(vegie)
-    fun increaseQuantity(vegie: Vegie) = changeQuantity(vegie, 1)
-    fun decreaseQuantity(vegie: Vegie) = changeQuantity(vegie, -1)
+//class VegieListener(val addButtonListener: (vegie: Vegie) -> Unit,
+//                    val removeButtonlistener: (vegie: Vegie) -> Unit,
+//                    val changeQuantity: (vegie: Vegie, stepValue:Int) -> Unit
+//) {
+//    fun onAddClicked(vegie: Vegie) = addButtonListener(vegie)
+//    fun onRemovedClick(vegie: Vegie) = removeButtonlistener(vegie)
+//    fun increaseQuantity(vegie: Vegie) = changeQuantity(vegie, 1)
+//    fun decreaseQuantity(vegie: Vegie) = changeQuantity(vegie, -1)
+//}
+
+interface VegieListener{
+
+    fun onAddClicked(vegie: Vegie)
+    fun onRemovedClick(vegie: Vegie)
+    fun onQuantityChanged(vegie: Vegie, step:Int)
 }

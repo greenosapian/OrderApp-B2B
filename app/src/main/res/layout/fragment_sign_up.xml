@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewmodel"
             type="com.example.greenosapian.signup.SignUpViewModel" />
@@ -72,12 +71,13 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="8dp"
+            android:visibility="visible"
             app:goneUnless="@{!viewmodel.isOtpScreenVisible}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8"
-            tools:visibility="visible">
+            tools:visibility="invisible">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/phoneNumberTF"
@@ -136,7 +136,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8"
             app:layout_constraintVertical_bias="0.0"
-            tools:visibility="gone">
+            tools:visibility="visible">
 
             <com.example.greenosapian.custom_view.OtpEditText
                 android:id="@+id/otpEditText"
