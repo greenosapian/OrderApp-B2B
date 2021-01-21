@@ -49,14 +49,28 @@ class CartFragment : Fragment() {
                 adapter.submitList(it)
             }
         })
-        binding.placeOrderButton.setOnClickListener{
-            orderPlacedDialog.show()
-        }
 
         binding.lifecycleOwner = this
         initRecyclerView()
         initDialog()
+        setUpObservers()
         return binding.root
+    }
+
+    private fun setUpObservers() {
+        viewmodel.navigateToHomePageFragment.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                orderPlacedDialog.dismiss()
+                this.findNavController().navigate(CartFragmentDirections.actionCartFragmentToHomePageFragment(it))
+                viewmodel.onNavigateToHomePageCompleted()
+            }
+        })
+
+        viewmodel.orderPlacedDialogVisibility.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                orderPlacedDialog.show()
+            }
+        })
     }
 
     private fun initRecyclerView() {
