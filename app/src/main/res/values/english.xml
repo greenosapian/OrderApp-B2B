@@ -22,7 +22,7 @@
     <string name="remove">remove</string>
     <string name="place_order">Place Order</string>
     <string name="total">Total</string>
-    <string name="go_to_menu">Go To Menu</string>
     <string name="order_placed">Order Placed!!!</string>
+    <string name="go_to_menu">Go To Menu</string>
 
 </resources>

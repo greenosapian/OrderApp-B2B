@@ -25,6 +25,10 @@ class CartViewModel(private val repository: CartRepository) : OrderListViewModel
         }
     }
 
+    fun onGoToMenuClicked(){
+        println("go to menu")
+    }
+
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()

@@ -1,6 +1,8 @@
 package com.example.greenosapian.cart
 
 import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.greenosapian.R
 import com.example.greenosapian.database.GreenDatabase
 import com.example.greenosapian.database.Vegie
+import com.example.greenosapian.databinding.DialogOrderPlacedBinding
 import com.example.greenosapian.databinding.FragmentCartBinding
 import com.example.greenosapian.orderlist.*
 import com.google.firebase.auth.FirebaseAuth
@@ -98,13 +101,15 @@ class CartFragment : Fragment() {
     private fun initDialog() {
         val builder = AlertDialog.Builder(this.context)
         val inflater = requireActivity().layoutInflater
-        val view: View = inflater.inflate(R.layout.dialog_order_placed, null)
+        val dialogBinding = DialogOrderPlacedBinding.inflate(inflater, null, false)
+//        val view: View = inflater.inflate(R.layout.dialog_order_placed, null)
+        dialogBinding.viewmodel = viewmodel
+        builder.setView(dialogBinding.root)
 
-        builder.setView(view)
-            .setPositiveButton(getString(R.string.go_to_menu)) { dialog, id ->
-                findNavController().navigate(CartFragmentDirections.actionCartFragmentToHomePageFragment(Firebase.auth.currentUser?.phoneNumber!!))
-            }
         orderPlacedDialog = builder.create()
         orderPlacedDialog.setCancelable(false)
+//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        orderPlacedDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        orderPlacedDialog.window?.setDimAmount(0.80f)
     }
 }
