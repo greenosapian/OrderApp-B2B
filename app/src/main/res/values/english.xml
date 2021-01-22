@@ -24,5 +24,7 @@
     <string name="total">Total</string>
     <string name="order_placed">Order Placed!!!</string>
     <string name="go_to_menu">Go To Menu</string>
+    <string name="date">Date:</string>
+    <string name="total_price_in_history">Total :</string>
 
 </resources>
