@@ -18,6 +18,9 @@ interface Dao {
 //    @Query("DELETE from accounts_table")
 //    fun deleteAllUserAccounts()
     @Insert
+    fun insertOrderHisoryItem(historyEntity: CartHistoryEntity)
+
+    @Insert
     fun insertVeggie(vegetableList: List<Vegie>)
 
     @Insert
@@ -50,6 +53,12 @@ interface Dao {
     @Query("SELECT * FROM vegetables WHERE id =:id")
     fun getVeggie(id:String):Vegie
 
+    @Query("SELECT * FROM carthistory")
+    fun getHistory():LiveData<List<CartHistoryEntity>>
 
+    @Query("UPDATE vegetables SET quantity=0")
+    fun clearVeggieQuantity()
 
+    @Query("DELETE FROM cart")
+    fun clearCart()
 }

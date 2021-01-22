@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.example.greenosapian.database.CartHistoryEntity
 import com.example.greenosapian.orderlist.OrderListViewModel
 import com.example.greenosapian.orderlist.OrderRepository
 import com.google.firebase.auth.FirebaseAuth
@@ -12,6 +13,7 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class CartViewModel(private val repository: CartRepository) : OrderListViewModel(repository) {
     private var viewModelJob = Job()
@@ -40,6 +42,10 @@ class CartViewModel(private val repository: CartRepository) : OrderListViewModel
 
     fun onPlaceOrderClicked(){
         _orderPlacedDialogVisibility.value = true
+        coroutineScope.launch {
+            repository.insertHistoryItem(CartHistoryEntity(System.currentTimeMillis(), totalPrice.value!!, cartItemList.value!!))
+            repository.clearCart()
+        }
     }
 
     fun onGoToMenuClicked() {

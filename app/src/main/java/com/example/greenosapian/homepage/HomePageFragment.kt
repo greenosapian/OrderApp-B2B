@@ -33,7 +33,7 @@ class HomePageFragment : Fragment() {
         }
 
         binding.historyButton.setOnClickListener{
-            println("history button clicked")
+            findNavController().navigate(HomePageFragmentDirections.actionHomePageFragmentToHistoryFragment())
         }
 
         binding.contactUsButton.setOnClickListener{

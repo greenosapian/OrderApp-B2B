@@ -1,5 +1,7 @@
 package com.example.greenosapian
 
+import android.annotation.SuppressLint
+import android.graphics.Paint
 import android.net.Uri
 import android.view.View
 import android.widget.ImageView
@@ -8,6 +10,8 @@ import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import java.text.DateFormat
+import java.util.*
 
 
 @BindingAdapter("app:goneUnless")
@@ -43,5 +47,9 @@ fun bindImageFromInternet(imgView: ImageView, imgUrl:String?) {
     }
 }
 
+@BindingAdapter("formatTime")
+fun formatDateFromTimestamp(textView: TextView, timeStamp:Long){
+    textView.text = java.text.SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH).format(Date(timeStamp))
 
+}
 

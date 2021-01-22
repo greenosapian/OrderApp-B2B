@@ -1,5 +1,6 @@
 package com.example.greenosapian.orderlist
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,7 +18,7 @@ import com.example.greenosapian.databinding.FragmentOrderListBinding
 class OrderListFragment : Fragment() {
 
     private lateinit var binding: FragmentOrderListBinding
-    private lateinit var viewmodel: OrderListViewModel
+    protected lateinit var viewmodel: OrderListViewModel
     private lateinit var adapter: VegieAdapter
 
     override fun onCreateView(
