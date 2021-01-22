@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.greenosapian.database.CartHistoryEntity
+import com.example.greenosapian.database.Vegie
 import com.example.greenosapian.databinding.ListItemHistoryBinding
+import com.example.greenosapian.orderlist.VegieAdapter
+import com.example.greenosapian.orderlist.VegieListener
 
 class HistoryAdapter(private val clickListener: HistoryListener) :
     ListAdapter<CartHistoryEntity, HistoryAdapter.ViewHolder>(HistoryDiffCallback()) {
@@ -28,7 +31,17 @@ class HistoryAdapter(private val clickListener: HistoryListener) :
         ) {
             binding.historyItem = item
             binding.historyListener = clickListener
+            setupInnerRecyclerView(binding, item.itemList)
             binding.executePendingBindings()
+        }
+
+        private fun setupInnerRecyclerView(
+            binding: ListItemHistoryBinding,
+            veggieList: List<Vegie>
+        ) {
+            val adapter = HistoryInnerAdapter()
+            binding.recyclerView.adapter = adapter
+            adapter.data = veggieList
         }
 
         companion object {

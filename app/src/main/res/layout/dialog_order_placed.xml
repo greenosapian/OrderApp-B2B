@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@{String.format(@string/total_price, viewmodel.totalPrice)}"
+                android:text="@{String.format(@string/price_in_Rs, viewmodel.totalPrice)}"
                 android:textColor="#449870"
                 android:textSize="28sp"
                 app:layout_constraintBottom_toTopOf="@+id/textView4"

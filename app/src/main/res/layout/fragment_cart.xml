@@ -58,7 +58,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:gravity="top"
-                android:text="@{String.format(@string/veggie_price, viewmodel.totalPrice)}"
+                android:text="@{String.format(@string/price_in_Rs, viewmodel.totalPrice)}"
                 android:textColor="#5EE648"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"

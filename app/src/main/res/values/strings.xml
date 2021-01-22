@@ -3,6 +3,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile_pic_description">profile_pic</string>
-    <string name="veggie_price">₹%d/kg</string>
-    <string name="total_price">₹%d</string>
+    <string name="price_per_kg">₹%d/kg</string>
+<!--    <string name="total_price">₹%d</string>-->
+    <string name="quantity_in_kg">%dkg</string>
+    <string name="price_in_Rs">₹%d</string>
 </resources>
