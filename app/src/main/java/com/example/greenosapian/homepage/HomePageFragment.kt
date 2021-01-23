@@ -47,35 +47,3 @@ class HomePageFragment : Fragment() {
 
 
 }
-
-
-
-//
-//
-//
-//binding.deleteAccountButton.isEnabled = false
-//var userPhoneNumber = HomePageFragmentArgs.fromBundle(
-//    requireArguments()
-//).userPhoneNumber
-//CoroutineScope(Dispatchers.Main).launch {
-//    user = ElasticApi.retrofitService.getUser(userPhoneNumber)
-//    binding.deleteAccountButton.isEnabled = true
-//    binding.userTV.text = user.name
-//}
-//
-//binding.signOutButton.setOnClickListener{
-//    this@HomePageFragment.findNavController().navigate(HomePageFragmentDirections.actionHomePageFragmentToSplashScreenFragment())
-//    Toast.makeText(context, "Signed Out Successful", Toast.LENGTH_LONG).show()
-//    Firebase.auth.signOut()
-//}
-//
-//binding.deleteAccountButton.setOnClickListener{
-//    CoroutineScope(Dispatchers.Main).launch{
-//        val response =  ElasticApi.retrofitService.deleteUser(user.phoneNumber)
-//        if(response._shards?.successful == 1){
-//            Firebase.auth.currentUser?.delete()
-//            Toast.makeText(context, "User Deleted Successfull: ${response._shards.successful}", Toast.LENGTH_LONG).show()
-//            this@HomePageFragment.findNavController().navigate(HomePageFragmentDirections.actionHomePageFragmentToSplashScreenFragment())
-//        }
-//    }
-//}

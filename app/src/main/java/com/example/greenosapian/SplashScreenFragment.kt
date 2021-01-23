@@ -56,7 +56,7 @@ class SplashScreenFragment : Fragment() {
                     .navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToHomePageFragment(phoneNumber))
             } else {
                 this@SplashScreenFragment.findNavController()
-                    .navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToSignUpFragment())
+                    .navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToLanguageSelectionFragment())
             }
         }
     }
