@@ -53,7 +53,7 @@ interface Dao {
     @Query("SELECT * FROM vegetables WHERE id =:id")
     fun getVeggie(id:String):Vegie
 
-    @Query("SELECT * FROM carthistory")
+    @Query("SELECT * FROM carthistory ORDER BY time DESC")
     fun getHistory():LiveData<List<CartHistoryEntity>>
 
     @Query("UPDATE vegetables SET quantity=0")
