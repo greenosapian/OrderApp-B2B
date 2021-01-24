@@ -38,7 +38,7 @@ class HomePageFragment : Fragment() {
 
         binding.contactUsButton.setOnClickListener{
 //            println("contact us button clicked")
-            findNavController().navigate(HomePageFragmentDirections.actionHomePageFragmentToContactUs())
+            findNavController().navigate(HomePageFragmentDirections.actionHomePageFragmentToContactUs2())
         }
 
 
