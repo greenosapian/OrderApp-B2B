@@ -54,6 +54,9 @@
         <action
             android:id="@+id/action_homePageFragment_to_historyFragment"
             app:destination="@id/historyFragment" />
+        <action
+            android:id="@+id/action_homePageFragment_to_contactUs"
+            app:destination="@id/contactUs" />
     </fragment>
     <fragment
         android:id="@+id/profilePageFragment"
@@ -91,4 +94,8 @@
         android:name="com.example.greenosapian.history.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/contactUs"
+        android:name="com.example.greenosapian.contactus.ContactUs"
+        android:label="ContactUs" />
 </navigation>

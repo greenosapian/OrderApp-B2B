@@ -37,8 +37,10 @@ class HomePageFragment : Fragment() {
         }
 
         binding.contactUsButton.setOnClickListener{
-            println("contact us button clicked")
+//            println("contact us button clicked")
+            findNavController().navigate(HomePageFragmentDirections.actionHomePageFragmentToContactUs())
         }
+
 
 
         binding.lifecycleOwner = this
