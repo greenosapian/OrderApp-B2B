@@ -11,13 +11,13 @@
         android:label="fragment_splash_screen"
         tools:layout="@layout/fragment_splash_screen">
         <action
-            android:id="@+id/action_splashScreenFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment"
+            android:id="@+id/action_splashScreenFragment_to_homePageFragment"
+            app:destination="@id/homePageFragment"
             app:popUpTo="@id/splashScreenFragment"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_splashScreenFragment_to_homePageFragment"
-            app:destination="@id/homePageFragment"
+            android:id="@+id/action_splashScreenFragment_to_languageSelectionFragment"
+            app:destination="@id/languageSelectionFragment"
             app:popUpTo="@id/splashScreenFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -54,9 +54,6 @@
         <action
             android:id="@+id/action_homePageFragment_to_historyFragment"
             app:destination="@id/historyFragment" />
-        <action
-            android:id="@+id/action_homePageFragment_to_contactUs"
-            app:destination="@id/contactUs" />
     </fragment>
     <fragment
         android:id="@+id/profilePageFragment"
@@ -95,7 +92,12 @@
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
     <fragment
-        android:id="@+id/contactUs"
-        android:name="com.example.greenosapian.contactus.ContactUs"
-        android:label="ContactUs" />
+        android:id="@+id/languageSelectionFragment"
+        android:name="com.example.greenosapian.LanguageSelectionFragment"
+        tools:layout="@layout/fragment_language_selection"
+        android:label="LanguageSelectionFragment" >
+        <action
+            android:id="@+id/action_languageSelectionFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
 </navigation>

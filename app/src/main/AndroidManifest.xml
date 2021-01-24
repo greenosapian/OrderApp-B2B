@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-
+        android:name=".multilanguage.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.GreenoSapian.NoActionBar"
-        tools:targetApi="n">
+        tools:targetApi="n"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

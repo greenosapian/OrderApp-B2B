@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Greeno Sapian</string>
+    <string name="profile_pic_description">profile_pic</string>
+    <string name="price_per_kg">₹%d/kg</string>
+    <string name="quantity_in_kg">%dkg</string>
+    <string name="price_in_Rs">₹%d</string>
+    <string name="english">English</string>
+    <string name="hindi">हिंदी</string>
+
+    <string name="verification">पंजीकरण</string>
+    <string name="verification_hint">हम आपके फ़ोन में <b>एक बार इस्तेमाल किये जाने वाला पासवर्ड</b> भेजेंगे </string>
+    <string name="get_otp">OTP ले</string>
+    <string name="phone_number">फ़ोन नंबर</string>
+    <string name="sign_up_image">sign_up_image</string>
+    <string name="submit_otp">OTP जमा करें</string>
+    <string name="didnt_receive_this_code">क्या आपके पास OTP नहीं पहुंचा?</string>
+    <string name="resend_otp">OTP दुबारा भेजे</string>
+    <string name="resend_otp_in">Resend OTP in</string>
+    <string name="sending_otp">OTP भेजा जा रहा है…</string>
+    <string name="name">नाम</string>
+    <string name="address">पता</string>
+    <string name="submit">जमा करे</string>
+    <string name="required_field">आवश्यक क्षेत्र</string>
+    <string name="order">आर्डर करें</string>
+    <string name="history">इतिहास देखें</string>
+    <string name="contact_us">हमे संपर्क करें</string>
+    <string name="proceed_to_cart">टोकरी  खोलें</string>
+    <string name="add">जोड़ें</string>
+    <string name="remove">हटाएँ</string>
+    <string name="place_order">Place Order</string>
+    <string name="total">Total</string>
+    <string name="order_placed">Order Placed!!!</string>
+    <string name="go_to_menu">Go To Menu</string>
+    <string name="date">Date:</string>
+    <string name="total_price_in_history">Total :</string>
+    <string name="Item">Item</string>
+    <string name="quantity">Quantity</string>
+    <string name="price_kg">Price(/kg)</string>
+</resources>
