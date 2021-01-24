@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Greeno Sapian</string>
-    <string name="profile_pic_description">profile_pic</string>
-    <string name="price_per_kg">₹%d/kg</string>
-    <string name="quantity_in_kg">%dkg</string>
-    <string name="price_in_Rs">₹%d</string>
-    <string name="english">English</string>
-    <string name="hindi">हिंदी</string>
+
 
     <string name="verification">पंजीकरण</string>
     <string name="verification_hint">हम आपके फ़ोन में <b>एक बार इस्तेमाल किये जाने वाला पासवर्ड</b> भेजेंगे </string>
@@ -29,12 +23,14 @@
     <string name="add">जोड़ें</string>
     <string name="remove">हटाएँ</string>
     <string name="place_order">Place Order</string>
-    <string name="total">Total</string>
+    <string name="total">कुल </string>
     <string name="order_placed">Order Placed!!!</string>
-    <string name="go_to_menu">Go To Menu</string>
-    <string name="date">Date:</string>
-    <string name="total_price_in_history">Total :</string>
-    <string name="Item">Item</string>
-    <string name="quantity">Quantity</string>
-    <string name="price_kg">Price(/kg)</string>
+    <string name="go_to_menu">मेनू में जाएँ </string>
+    <string name="date">दिनाक:</string>
+    <string name="total_price_in_history">कुल  :</string>
+    <string name="Item">वस्तु</string>
+    <string name="quantity">मात्रा</string>
+    <string name="price_kg">कीमत(/kg)</string>
+    <string name="contact_us_any_day_of_the_week">आप हमे हफ्ते के <b>किसी भी दिन</b> संपर्क कर सकते हैं </string>
+    <string name="contact_us_time">सुबह <b>10</b> बजे से शाम के <b>6</b> बजे तक </string>
 </resources>

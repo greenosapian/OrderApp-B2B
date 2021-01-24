@@ -82,7 +82,7 @@
         android:id="@+id/cartFragment"
         android:name="com.example.greenosapian.cart.CartFragment"
         android:label="CartFragment"
-        tools:layout="@layout/fragment_cart" >
+        tools:layout="@layout/fragment_cart">
         <action
             android:id="@+id/action_cartFragment_to_homePageFragment"
             app:destination="@id/homePageFragment"
@@ -97,8 +97,8 @@
     <fragment
         android:id="@+id/languageSelectionFragment"
         android:name="com.example.greenosapian.LanguageSelectionFragment"
-        tools:layout="@layout/fragment_language_selection"
-        android:label="LanguageSelectionFragment" >
+        android:label="LanguageSelectionFragment"
+        tools:layout="@layout/fragment_language_selection">
         <action
             android:id="@+id/action_languageSelectionFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
@@ -106,5 +106,6 @@
     <fragment
         android:id="@+id/contactUs2"
         android:name="com.example.greenosapian.contactus.ContactUs"
-        android:label="ContactUs" />
+        android:label="ContactUs"
+        tools:layout="@layout/fragment_contact_us" />
 </navigation>

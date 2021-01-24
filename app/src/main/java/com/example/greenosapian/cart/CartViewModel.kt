@@ -40,20 +40,28 @@ class CartViewModel(private val repository: CartRepository) : OrderListViewModel
         }
     }
 
-    fun onPlaceOrderClicked(){
+    fun onPlaceOrderClicked() {
         _orderPlacedDialogVisibility.value = true
-        coroutineScope.launch {
-            repository.insertHistoryItem(CartHistoryEntity(System.currentTimeMillis(), totalPrice.value!!, cartItemList.value!!))
-            repository.clearCart()
-        }
+
     }
 
     fun onGoToMenuClicked() {
-        val phoneNumber:String = Firebase.auth.currentUser?.phoneNumber!!
-        _navigateToHomePageFragment.value = phoneNumber
+        coroutineScope.launch {
+            repository.insertHistoryItem(
+                CartHistoryEntity(
+                    System.currentTimeMillis(),
+                    totalPrice.value!!,
+                    cartItemList.value!!
+                )
+            )
+            repository.clearCart()
+            val phoneNumber: String = Firebase.auth.currentUser?.phoneNumber!!
+            _navigateToHomePageFragment.value = phoneNumber
+
+        }
     }
 
-    fun onNavigateToHomePageCompleted(){
+    fun onNavigateToHomePageCompleted() {
         _navigateToHomePageFragment.value = null
     }
 

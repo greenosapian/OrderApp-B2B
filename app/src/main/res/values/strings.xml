@@ -1,11 +1,10 @@
 <resources>
-    <string name="app_name">Greeno Sapian</string>
-    <string name="profile_pic_description">profile_pic</string>
-    <string name="price_per_kg">₹%d/kg</string>
-    <string name="quantity_in_kg">%dkg</string>
-    <string name="price_in_Rs">₹%d</string>
-    <string name="english">English</string>
-    <string name="hindi">हिंदी</string>
+    <string name="app_name" translatable="false">Greeno Sapian</string>
+    <string name="price_per_kg" translatable="false">₹%d/kg</string>
+    <string name="quantity_in_kg" translatable="false">%dkg</string>
+    <string name="price_in_Rs" translatable="false">₹%d</string>
+    <string name="english" translatable="false">English</string>
+    <string name="hindi" translatable="false">हिंदी</string>
 
     <string name="verification">Verification</string>
     <string name="verification_hint">We will send you an <b>One Time Password</b> on your phone number.</string>
@@ -36,6 +35,11 @@
     <string name="Item">Item</string>
     <string name="quantity">Quantity</string>
     <string name="price_kg">Price(/kg)</string>
-
-
+    <string name="owner_address" translatable="false">29/28, Sadar Bazar, Delhi</string>
+    <string name="owner_contact_info_1" translatable="false">(+91) 638–8977659</string>
+    <string name="owner_contact_info_2" translatable="false">(+91) 850–6811986</string>
+    <string name="contact_us_any_day_of_the_week">Contact Us <b>any day</b> of the week</string>
+    <string name="contact_us_time">Time: <b>10AM</b> - <b>6PM</b></string>
+    <string name="site_url" translatable="false">www.greenosapian.com</string>
+    <string name="site_url_value" translatable="false">https://www.greenosapian.com</string>
 </resources>
