@@ -8,6 +8,10 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.example.greenosapian.R
 import com.example.greenosapian.database.GreenDatabase
 import com.example.greenosapian.databinding.FragmentHistoryBinding
@@ -31,10 +35,18 @@ class HistoryFragment : Fragment() {
 
         setUpRecyclerView()
         setUpObservers()
+        setUpToolBar()
 
         binding.viewmodel = viewmodel
         binding.lifecycleOwner = this
         return binding.root
+    }
+
+    private fun setUpToolBar() {
+        val navController = findNavController()
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        binding.collapsingToolbarLayout.setupWithNavController(binding.historyToolbar, navController, appBarConfiguration)
+//        binding.historyToolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
     private fun setUpRecyclerView() {

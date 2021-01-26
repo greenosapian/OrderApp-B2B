@@ -12,6 +12,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:contentScrim="?attr/colorPrimary"
+                app:expandedTitleGravity="top"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/historyToolbar"
+                    app:titleTextColor="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_collapseMode="pin" />
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recylerView"
             android:layout_width="match_parent"
@@ -22,7 +47,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
             app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

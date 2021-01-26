@@ -33,9 +33,12 @@ fun BitmapFactory.Options.calculateInSampleSize(
     inSampleSize = sampleSize
 }
 
+//TODO remove always true
 suspend fun doesUserExist(phoneNumber: String): Boolean = try {
     ElasticApi.retrofitService.getUser(phoneNumber)
     true
 } catch (e: HttpException) {
     e.code() != 404
-}
+//} catch (e:Exception){
+//    true
+//}

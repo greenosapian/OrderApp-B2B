@@ -13,6 +13,8 @@
         <action
             android:id="@+id/action_splashScreenFragment_to_homePageFragment"
             app:destination="@id/homePageFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
             app:popUpTo="@id/splashScreenFragment"
             app:popUpToInclusive="true" />
         <action
@@ -29,11 +31,17 @@
         <action
             android:id="@+id/action_signUpFragment_to_profilePageFragment"
             app:destination="@id/profilePageFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/signUpFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_signUpFragment_to_homePageFragment"
-            app:destination="@id/homePageFragment" />
+            app:destination="@id/homePageFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/homePageFragment"
@@ -50,13 +58,25 @@
             app:argType="string" />
         <action
             android:id="@+id/action_homePageFragment_to_orderListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             app:destination="@id/orderListFragment" />
         <action
             android:id="@+id/action_homePageFragment_to_historyFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             app:destination="@id/historyFragment" />
         <action
             android:id="@+id/action_homePageFragment_to_contactUs2"
-            app:destination="@id/contactUs2" />
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:destination="@id/contactUs" />
     </fragment>
     <fragment
         android:id="@+id/profilePageFragment"
@@ -66,6 +86,8 @@
         <action
             android:id="@+id/action_profilePageFragment_to_homePageFragment"
             app:destination="@id/homePageFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
             app:popUpTo="@id/profilePageFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -76,6 +98,10 @@
         tools:layout="@layout/fragment_order_list">
         <action
             android:id="@+id/action_orderListFragment_to_cartFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             app:destination="@id/cartFragment" />
     </fragment>
     <fragment
@@ -86,13 +112,15 @@
         <action
             android:id="@+id/action_cartFragment_to_homePageFragment"
             app:destination="@id/homePageFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
             app:popUpTo="@id/homePageFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.example.greenosapian.history.HistoryFragment"
-        android:label="fragment_history"
+        android:label="@string/history"
         tools:layout="@layout/fragment_history" />
     <fragment
         android:id="@+id/languageSelectionFragment"
@@ -101,10 +129,14 @@
         tools:layout="@layout/fragment_language_selection">
         <action
             android:id="@+id/action_languageSelectionFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
+            app:destination="@id/signUpFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/contactUs2"
+        android:id="@+id/contactUs"
         android:name="com.example.greenosapian.contactus.ContactUs"
         android:label="ContactUs"
         tools:layout="@layout/fragment_contact_us" />
