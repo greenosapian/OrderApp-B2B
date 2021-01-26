@@ -39,6 +39,7 @@ suspend fun doesUserExist(phoneNumber: String): Boolean = try {
     true
 } catch (e: HttpException) {
     e.code() != 404
+}
 //} catch (e:Exception){
 //    true
 //}
