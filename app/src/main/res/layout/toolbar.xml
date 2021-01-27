@@ -3,7 +3,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:background="#D8D4D4"
+        android:background="@color/toolbar_background_color"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize" />
 </layout>
