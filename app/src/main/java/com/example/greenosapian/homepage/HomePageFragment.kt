@@ -1,22 +1,17 @@
 package com.example.greenosapian.homepage
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.example.greenosapian.R
+import androidx.appcompat.widget.Toolbar
 import com.example.greenosapian.databinding.FragmentHomePageBinding
-import com.example.greenosapian.network.ElasticApi
-import com.example.greenosapian.network.User
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class HomePageFragment : Fragment() {
     private lateinit var binding: FragmentHomePageBinding
@@ -25,27 +20,38 @@ class HomePageFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater,
-            R.layout.fragment_home_page, container, false)
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_home_page, container, false
+        )
 
-        binding.orderButton.setOnClickListener{
+        binding.orderButton.setOnClickListener {
             findNavController().navigate(HomePageFragmentDirections.actionHomePageFragmentToOrderListFragment())
         }
 
-        binding.historyButton.setOnClickListener{
+        binding.historyButton.setOnClickListener {
             findNavController().navigate(HomePageFragmentDirections.actionHomePageFragmentToHistoryFragment())
         }
 
-        binding.contactUsButton.setOnClickListener{
+        binding.contactUsButton.setOnClickListener {
 //            println("contact us button clicked")
             findNavController().navigate(HomePageFragmentDirections.actionHomePageFragmentToContactUs2())
         }
 
 
-
+        setUpToolbar()
         binding.lifecycleOwner = this
         return binding.root
     }
 
+    private fun setUpToolbar() {
+        val navController = findNavController()
+        val appBarConfigurations = AppBarConfiguration(setOf(R.id.homePageFragment), binding.drawerLayout)
+        binding.toolbarLayout.toolbar.setupWithNavController(navController, appBarConfigurations)
+    }
 
+    override fun onStop() {
+        binding.toolbarLayout.toolbar.title = "GreenoSapian"
+        super.onStop()
+    }
 }

@@ -1,14 +1,13 @@
 package com.example.greenosapian.history
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -45,8 +44,7 @@ class HistoryFragment : Fragment() {
     private fun setUpToolBar() {
         val navController = findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-        binding.collapsingToolbarLayout.setupWithNavController(binding.historyToolbar, navController, appBarConfiguration)
-//        binding.historyToolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.toolbarLayout.toolbar.setupWithNavController(navController,appBarConfiguration)
     }
 
     private fun setUpRecyclerView() {
@@ -63,5 +61,10 @@ class HistoryFragment : Fragment() {
                 adapter.submitList(it)
             }
         })
+    }
+
+    override fun onStop() {
+        binding.toolbarLayout.toolbar.title = getString(R.string.history)
+        super.onStop()
     }
 }

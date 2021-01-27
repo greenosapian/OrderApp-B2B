@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#CFCFCF</color>
     <color name="semi_transparent">#EF9595</color>
+    <color name="toolbar_background_color">#454545</color>
 </resources>
