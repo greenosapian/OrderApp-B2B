@@ -10,6 +10,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.greenosapian.R
@@ -26,7 +28,7 @@ class CartFragment : Fragment() {
     private lateinit var binding: FragmentCartBinding
     protected lateinit var viewmodel: CartViewModel
     protected lateinit var adapter: VegieAdapter
-    lateinit var orderPlacedDialog:AlertDialog
+    lateinit var orderPlacedDialog: AlertDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,7 +56,19 @@ class CartFragment : Fragment() {
         initRecyclerView()
         initDialog()
         setUpObservers()
+        setUpToolBar()
         return binding.root
+    }
+
+    private fun setUpToolBar() {
+        val navController = findNavController()
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+    }
+
+    override fun onStop() {
+        binding.toolbar.title = getString(R.string.cart)
+        super.onStop()
     }
 
     private fun setUpObservers() {

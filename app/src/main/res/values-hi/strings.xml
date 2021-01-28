@@ -33,4 +33,6 @@
     <string name="price_kg">कीमत(/kg)</string>
     <string name="contact_us_any_day_of_the_week">आप हमे हफ्ते के <b>किसी भी दिन</b> संपर्क कर सकते हैं </string>
     <string name="contact_us_time">सुबह <b>10</b> बजे से शाम के <b>6</b> बजे तक </string>
+    <string name="todays_list">Today\'s List</string>
+    <string name="cart">Cart</string>
 </resources>

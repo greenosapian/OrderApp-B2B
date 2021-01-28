@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewmodel"
             type="com.example.greenosapian.cart.CartViewModel" />
@@ -12,6 +13,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:background="@color/toolbar_background_color"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recylerView"
@@ -22,7 +32,7 @@
             app:layout_constraintBottom_toTopOf="@+id/bottomToolbar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bottomToolbar"
@@ -76,9 +86,9 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="8dp"
-                android:text="@string/place_order"
-                android:onClick="@{()->viewmodel.onPlaceOrderClicked()}"
                 android:enabled="@{viewmodel.totalPrice > 0 ? true:false}"
+                android:onClick="@{()->viewmodel.onPlaceOrderClicked()}"
+                android:text="@string/place_order"
                 android:textAllCaps="false"
                 android:textSize="20sp"
                 app:backgroundTint="#FF636C"

@@ -42,4 +42,6 @@
     <string name="contact_us_time">Time: <b>10AM</b> - <b>6PM</b></string>
     <string name="site_url" translatable="false">www.greenosapian.com</string>
     <string name="site_url_value" translatable="false">https://www.greenosapian.com</string>
+    <string name="todays_list">Today\'s List</string>
+    <string name="cart">Cart</string>
 </resources>

@@ -10,10 +10,12 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
+            app:elevation="0dp"
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
+                app:layout_scrollFlags="scroll"
                 android:background="@color/toolbar_background_color"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize" />
@@ -22,6 +24,7 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:overScrollMode="never"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout

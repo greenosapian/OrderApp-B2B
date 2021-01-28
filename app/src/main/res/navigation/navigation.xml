@@ -94,20 +94,20 @@
     <fragment
         android:id="@+id/orderListFragment"
         android:name="com.example.greenosapian.orderlist.OrderListFragment"
-        android:label="OrderListFragment"
+        android:label="@string/todays_list"
         tools:layout="@layout/fragment_order_list">
         <action
             android:id="@+id/action_orderListFragment_to_cartFragment"
+            app:destination="@id/cartFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:destination="@id/cartFragment" />
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.greenosapian.cart.CartFragment"
-        android:label="CartFragment"
+        android:label="@string/cart"
         tools:layout="@layout/fragment_cart">
         <action
             android:id="@+id/action_cartFragment_to_homePageFragment"
@@ -138,6 +138,6 @@
     <fragment
         android:id="@+id/contactUs"
         android:name="com.example.greenosapian.contactus.ContactUs"
-        android:label="ContactUs"
+        android:label="@string/contact_us"
         tools:layout="@layout/fragment_contact_us" />
 </navigation>

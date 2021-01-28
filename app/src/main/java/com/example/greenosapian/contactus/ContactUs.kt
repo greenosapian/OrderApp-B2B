@@ -48,4 +48,8 @@ class ContactUs : Fragment() {
         startActivity(getIntent)
     }
 
+    override fun onStop() {
+        binding.toolbar.title = getString(R.string.contact_us)
+        super.onStop()
+    }
 }

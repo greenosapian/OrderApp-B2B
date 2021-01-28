@@ -44,7 +44,7 @@ class HistoryFragment : Fragment() {
     private fun setUpToolBar() {
         val navController = findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-        binding.toolbarLayout.toolbar.setupWithNavController(navController,appBarConfiguration)
+        binding.toolbar.setupWithNavController(navController,appBarConfiguration)
     }
 
     private fun setUpRecyclerView() {
@@ -64,7 +64,7 @@ class HistoryFragment : Fragment() {
     }
 
     override fun onStop() {
-        binding.toolbarLayout.toolbar.title = getString(R.string.history)
+        binding.toolbar.title = getString(R.string.history)
         super.onStop()
     }
 }

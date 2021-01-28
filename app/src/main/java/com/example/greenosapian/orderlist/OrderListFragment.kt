@@ -10,6 +10,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.example.greenosapian.R
 import com.example.greenosapian.database.GreenDatabase
 import com.example.greenosapian.database.Vegie
@@ -50,7 +52,15 @@ class OrderListFragment : Fragment() {
                 adapter.submitList(it)
             }
         })
+
+        setUpToolbar()
         return binding.root
+    }
+
+    private fun setUpToolbar() {
+        val navController = findNavController()
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
     private fun initRecyclerView() {
@@ -70,5 +80,10 @@ class OrderListFragment : Fragment() {
         )
 
         binding.recylerView.adapter = adapter
+    }
+
+    override fun onStop() {
+        binding.toolbar.title = getString(R.string.todays_list)
+        super.onStop()
     }
 }
