@@ -51,8 +51,7 @@ class SplashScreenFragment : Fragment() {
     private fun chooseNextScreen() {
         CoroutineScope(Dispatchers.Main).launch {
             val phoneNumber = Firebase.auth.currentUser?.phoneNumber
-            //TODO remove always true
-            if (true || !phoneNumber.isNullOrEmpty() && doesUserExist(phoneNumber)) {
+            if (!phoneNumber.isNullOrEmpty() && doesUserExist(phoneNumber)) {
                 this@SplashScreenFragment.findNavController()
                     .navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToHomePageFragment(phoneNumber!!))
             } else {

@@ -112,8 +112,8 @@
         <action
             android:id="@+id/action_cartFragment_to_homePageFragment"
             app:destination="@id/homePageFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
             app:popUpTo="@id/homePageFragment"
             app:popUpToInclusive="true" />
     </fragment>
