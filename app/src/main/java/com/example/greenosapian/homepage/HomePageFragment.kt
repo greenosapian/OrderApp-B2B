@@ -47,11 +47,11 @@ class HomePageFragment : Fragment() {
     private fun setUpToolbar() {
         val navController = findNavController()
         val appBarConfigurations = AppBarConfiguration(setOf(R.id.homePageFragment), binding.drawerLayout)
-        binding.toolbarLayout.toolbar.setupWithNavController(navController, appBarConfigurations)
+        binding.toolbar.setupWithNavController(navController, appBarConfigurations)
     }
 
     override fun onStop() {
-        binding.toolbarLayout.toolbar.title = "GreenoSapian"
+        binding.toolbar.title = "GreenoSapian"
         super.onStop()
     }
 }

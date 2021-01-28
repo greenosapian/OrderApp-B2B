@@ -17,41 +17,35 @@ open class OrderRepository(private val dao: com.example.greenosapian.database.Da
 
     init {
         CoroutineScope(Dispatchers.IO).launch {
-            fetchVegetableListFromNetwork()
+//            fetchVegetableListFromNetwork()
         }
     }
 
     fun getVegetableList() = veggieList
 
     @WorkerThread
-    private suspend fun fetchVegetableListFromNetwork() {
+    suspend fun fetchVegetableListFromNetwork() = withContext(Dispatchers.IO){
 
         if (dao.getVegetableCount() != 0L) {
-            return
+            return@withContext
         }
 
-        val networkVeggies: List<NetworkVegie>? = try {
-            networkService.getVegetables().outerHits.vegies
-        } catch (e: Exception) {
-            null
-        }
+        val networkVeggies = networkService.getVegetables().outerHits.vegies
 
-        networkVeggies?.let {
-            val vegetableList: MutableList<Vegie> = mutableListOf()
-            for (networkVeggie in it) {
+        val vegetableList: MutableList<Vegie> = mutableListOf()
+        for (networkVeggie in networkVeggies) {
 
-                vegetableList.add(
-                    Vegie(
-                        networkVeggie.id,
-                        networkVeggie.value.name,
-                        networkVeggie.value.price,
-                        0,
-                        networkVeggie.value.imageUrl
-                    )
+            vegetableList.add(
+                Vegie(
+                    networkVeggie.id,
+                    networkVeggie.value.name,
+                    networkVeggie.value.price,
+                    0,
+                    networkVeggie.value.imageUrl
                 )
-            }
-            dao.insertVeggie(vegetableList)
+            )
         }
+        dao.insertVeggie(vegetableList)
     }
 
     @WorkerThread
@@ -83,5 +77,4 @@ open class OrderRepository(private val dao: com.example.greenosapian.database.Da
     suspend fun removeCartItem(cartItem: CartItem) = withContext(Dispatchers.IO) {
         dao.removeCartItem(cartItem)
     }
-
 }

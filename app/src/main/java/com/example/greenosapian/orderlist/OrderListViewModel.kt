@@ -1,16 +1,40 @@
 package com.example.greenosapian.orderlist
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.greenosapian.database.CartItem
 import com.example.greenosapian.database.Vegie
 import kotlinx.coroutines.*
+
+enum class ElasticApiStatus { LOADING, DONE, ERROR }
 
 open class OrderListViewModel(private val repository: OrderRepository) : ViewModel() {
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
+    private val _status = MutableLiveData<ElasticApiStatus>()
+    val status: LiveData<ElasticApiStatus>
+        get() = _status
+
     val veggies = repository.getVegetableList()
+
+    init {
+        getVegetableList()
+    }
+
+    private fun getVegetableList() {
+        coroutineScope.launch {
+            try {
+                _status.value = ElasticApiStatus.LOADING
+                repository.fetchVegetableListFromNetwork()
+                _status.value = ElasticApiStatus.DONE
+            } catch (t: Throwable) {
+                _status.value = ElasticApiStatus.ERROR
+            }
+        }
+    }
 
     fun addVeggieInCart(veggie: Vegie) {
         coroutineScope.launch {

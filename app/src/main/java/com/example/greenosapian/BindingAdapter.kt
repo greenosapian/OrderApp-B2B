@@ -5,12 +5,14 @@ import android.graphics.Paint
 import android.net.Uri
 import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.greenosapian.database.Vegie
+import com.example.greenosapian.orderlist.ElasticApiStatus
 import java.lang.StringBuilder
 import java.text.DateFormat
 import java.util.*
@@ -53,5 +55,26 @@ fun bindImageFromInternet(imgView: ImageView, imgUrl:String?) {
 fun formatDateFromTimestamp(textView: TextView, timeStamp:Long){
     textView.text = java.text.SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH).format(Date(timeStamp))
 
+}
+
+@BindingAdapter("elasticApiStatus")
+fun bindstatus(statusImageView: ImageView, status:ElasticApiStatus?){
+    when(status) {
+        ElasticApiStatus.ERROR -> {
+            statusImageView.visibility = View.VISIBLE
+            statusImageView.setImageResource(R.drawable.ic_connection_error)
+        }
+        ElasticApiStatus.DONE -> {
+            statusImageView.visibility = View.GONE
+        }
+    }
+}
+
+@BindingAdapter("elasticApiStatus")
+fun bindStatus(view: View, status:ElasticApiStatus?){
+    when(status) {
+        ElasticApiStatus.LOADING -> view.visibility = View.VISIBLE
+        else -> view.visibility = View.GONE
+    }
 }
 
