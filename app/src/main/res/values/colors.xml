@@ -10,4 +10,5 @@
     <color name="grey">#CFCFCF</color>
     <color name="semi_transparent">#EF9595</color>
     <color name="toolbar_background_color">#D8D4D4</color>
+    <color name="white_app_bg_color">#E5E5E5</color>
 </resources>

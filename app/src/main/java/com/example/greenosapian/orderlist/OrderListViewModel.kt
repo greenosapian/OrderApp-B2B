@@ -76,7 +76,6 @@ open class OrderListViewModel(private val repository: OrderRepository) : ViewMod
 
     override fun onCleared() {
         super.onCleared()
-
         viewModelJob.cancel()
     }
 }

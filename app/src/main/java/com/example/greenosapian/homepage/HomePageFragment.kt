@@ -39,19 +39,14 @@ class HomePageFragment : Fragment() {
         }
 
 
-        setUpToolbar()
+//        setUpToolbar()
         binding.lifecycleOwner = this
         return binding.root
     }
 
     private fun setUpToolbar() {
-        val navController = findNavController()
-        val appBarConfigurations = AppBarConfiguration(setOf(R.id.homePageFragment), binding.drawerLayout)
-        binding.toolbar.setupWithNavController(navController, appBarConfigurations)
-    }
-
-    override fun onStop() {
-        binding.toolbar.title = "GreenoSapian"
-        super.onStop()
+//        val navController = findNavController()
+//        val appBarConfigurations = AppBarConfiguration(setOf(R.id.homePageFragment), binding.drawerLayout)
+//        binding.toolbar.setupWithNavController(navController, appBarConfigurations)
     }
 }

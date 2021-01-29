@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Greeno Sapian</string>
+    <string name="app_name" translatable="false">GreenoSapian</string>
     <string name="price_per_kg" translatable="false">₹%d/kg</string>
     <string name="quantity_in_kg" translatable="false">%dkg</string>
     <string name="price_in_Rs" translatable="false">₹%d</string>
