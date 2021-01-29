@@ -29,7 +29,6 @@ class HistoryFragment : Fragment() {
         val repository = HistoryRepository(GreenDatabase.getInstance(application).dao)
         val viewModelFactory =
             HistoryViewModelFactory(repository)
-
         viewmodel = ViewModelProvider(this, viewModelFactory).get(HistoryViewModel::class.java)
 
         setUpRecyclerView()

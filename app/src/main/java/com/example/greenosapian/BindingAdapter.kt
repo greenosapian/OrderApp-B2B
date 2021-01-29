@@ -9,6 +9,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.greenosapian.database.Vegie
@@ -75,6 +76,14 @@ fun bindStatus(view: View, status:ElasticApiStatus?){
     when(status) {
         ElasticApiStatus.LOADING -> view.visibility = View.VISIBLE
         else -> view.visibility = View.GONE
+    }
+}
+
+@BindingAdapter("apiStatus")
+fun bindStatus(recyclerView: RecyclerView, status:ElasticApiStatus?){
+    when(status) {
+        ElasticApiStatus.DONE -> recyclerView.visibility = View.VISIBLE
+        else -> recyclerView.visibility = View.GONE
     }
 }
 

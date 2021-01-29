@@ -3,6 +3,7 @@ package com.example.greenosapian.orderlist
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.greenosapian.bindImage
 import com.example.greenosapian.database.CartItem
 import com.example.greenosapian.database.Vegie
 import kotlinx.coroutines.*
@@ -28,6 +29,8 @@ open class OrderListViewModel(private val repository: OrderRepository) : ViewMod
         coroutineScope.launch {
             try {
                 _status.value = ElasticApiStatus.LOADING
+                //this delay is for smooth transition
+                delay(900)
                 repository.fetchVegetableListFromNetwork()
                 _status.value = ElasticApiStatus.DONE
             } catch (t: Throwable) {
@@ -73,6 +76,7 @@ open class OrderListViewModel(private val repository: OrderRepository) : ViewMod
 
     override fun onCleared() {
         super.onCleared()
+
         viewModelJob.cancel()
     }
 }
