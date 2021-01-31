@@ -31,11 +31,10 @@
                 app:layout_scrollFlags="scroll|enterAlways" />
         </com.google.android.material.appbar.AppBarLayout>
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recylerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/white_app_bg_color"
             app:apiStatus="@{viewmodel.status}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

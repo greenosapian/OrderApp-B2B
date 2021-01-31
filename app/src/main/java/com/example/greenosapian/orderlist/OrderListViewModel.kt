@@ -21,6 +21,7 @@ open class OrderListViewModel(private val repository: OrderRepository) : ViewMod
 
     val veggies = repository.getVegetableList()
 
+
     init {
         getVegetableList()
     }
