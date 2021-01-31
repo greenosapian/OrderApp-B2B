@@ -1,5 +1,6 @@
 package com.example.greenosapian.orderlist
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.*
@@ -55,13 +56,7 @@ class OrderListFragment : Fragment() {
 
         //TODO learn to do this in xml itlself
         //prevent recylerview from overlapping with proceedToCartButton
-        binding.proceedToCartButton.viewTreeObserver.addOnGlobalLayoutListener ( object : ViewTreeObserver.OnGlobalLayoutListener{
-            override fun onGlobalLayout() {
-                binding.proceedToCartButton.viewTreeObserver.removeOnGlobalLayoutListener(this);
-                binding.recylerView.setPadding(0,0,0, binding.proceedToCartButton.height)
-            }
-        }
-        )
+        binding.proceedToCartButton.post { binding.recylerView.setPadding(0,0,0, binding.proceedToCartButton.height) }
 
         setUpToolbar()
         return binding.root
