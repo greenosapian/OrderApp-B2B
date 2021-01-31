@@ -51,6 +51,7 @@ class VegieAdapter(val clickListener: VegieListener) :
                     }
                 }
                 binding.veggie = newVegie
+                binding.totalPrice = newVegie?.price?.times(newVegie.quantity) ?: 0
             }
             binding.executePendingBindings()
         }

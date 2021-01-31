@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="totalPrice"
+            type="Long" />
         <variable
             name="veggie"
             type="com.example.greenosapian.database.Vegie" />
@@ -38,15 +40,15 @@
                 android:layout_height="80dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="16dp"
-                app:cardElevation="0dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="#6C63FF"
                 android:layout_marginBottom="16dp"
                 app:cardBackgroundColor="#806C63FF"
                 app:cardCornerRadius="18dp"
+                app:cardElevation="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="#6C63FF"
+                app:strokeWidth="1dp">
 
                 <ImageView
                     android:id="@+id/imageView2"
@@ -75,16 +77,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="4dp"
                 android:text="@{veggie.name}"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/textView13"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/cardView"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
                 tools:text="Cauliflower" />
 
             <TextView
@@ -93,12 +98,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="@{String.format(@string/price_per_kg, veggie.price)}"
+                invisibleUnlessQuantity="@{veggie.quantity}"
+                android:text="@{String.format(@string/price_in_Rs, totalPrice)}"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/addButton"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.519"
                 app:layout_constraintStart_toStartOf="@+id/guideline2"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="packed"
@@ -110,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="8dp"
                 android:minWidth="0dp"
                 android:minHeight="0dp"
                 android:onClick="@{()->clickListener.onAddClicked(veggie)}"
@@ -136,6 +143,7 @@
                 android:minWidth="0dp"
                 android:minHeight="0dp"
                 android:onClick="@{()->clickListener.onRemovedClick(veggie)}"
+                android:paddingVertical="4dp"
                 android:paddingLeft="4dp"
                 android:paddingTop="0dp"
                 android:paddingRight="4dp"
@@ -153,28 +161,37 @@
                 tools:visibility="visible" />
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="8dp"
+                android:paddingVertical="0dp"
                 app:cardCornerRadius="5dp"
                 app:invisibleUnlessQuantity="@{veggie.quantity}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/cardView"
-                app:layout_constraintTop_toBottomOf="@+id/veggieNameTV"
+                app:layout_constraintTop_toBottomOf="@+id/textView13"
                 app:strokeColor="@color/black"
                 app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
                     <Button
                         style="@style/Widget.App.Button.OutlinedButton.IconOnly"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="@{()->clickListener.onQuantityChanged(veggie, -1)}"
+                        android:paddingVertical="0dp"
                         app:icon="@drawable/ic_remove_24px"
-                        app:layout_constraintBottom_toBottomOf="parent" />
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        tools:visibility="visible" />
 
                     <TextView
                         android:layout_width="30dp"
@@ -189,11 +206,31 @@
                         style="@style/Widget.App.Button.OutlinedButton.IconOnly"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:minHeight="0dp"
                         android:onClick="@{()->clickListener.onQuantityChanged(veggie,1)}"
+                        android:paddingVertical="0dp"
                         app:icon="@drawable/ic_add_black_18dp" />
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:text="@{String.format(@string/price_per_kg, veggie.price)}"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/materialCardView"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/cardView"
+                app:layout_constraintTop_toBottomOf="@+id/veggieNameTV"
+                tools:text="₹ 15/kg" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
