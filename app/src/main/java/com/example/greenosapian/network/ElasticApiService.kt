@@ -24,11 +24,11 @@ internal val retrofit = Retrofit.Builder()
     .build()
 
 interface ElasticApiService {
-    @GET("test004/users/{user_phone_number}/_source")
+    @GET("test003/users/{user_phone_number}/_source")
     suspend fun getUser(@Path(value = "user_phone_number") userId: String) : User
 
     @Headers("Content-Type: application/json")
-    @POST("test004/users/{user_id}")
+    @POST("test003/users/{user_id}")
     suspend fun insertUser(@Path(value = "user_id") userId: String, @Body user: User):NetworkResponse
 
     @DELETE("test003/users/{user_id}")

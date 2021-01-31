@@ -20,7 +20,10 @@ data class Vegie(
     var quantity: Int = 0,
 
     @ColumnInfo(name = "image_url")
-    var imageUrl: String?
+    var imageUrl: String?,
+
+    @ColumnInfo(name="total_price")
+    var totalPrice: Long = 0
 )
 
 @Entity(

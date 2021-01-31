@@ -27,7 +27,7 @@ import com.google.firebase.ktx.Firebase
 class CartFragment : Fragment() {
     private lateinit var binding: FragmentCartBinding
     protected lateinit var viewmodel: CartViewModel
-    protected lateinit var adapter: VegieAdapter
+    protected lateinit var adapter: CartVegieAdapter
     lateinit var orderPlacedDialog: AlertDialog
 
     override fun onCreateView(
@@ -88,7 +88,7 @@ class CartFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        adapter = VegieAdapter(object : VegieListener {
+        adapter = CartVegieAdapter(object : VegieListener {
             override fun onAddClicked(vegie: Vegie) {
                 viewmodel.addVeggieInCart(vegie)
             }

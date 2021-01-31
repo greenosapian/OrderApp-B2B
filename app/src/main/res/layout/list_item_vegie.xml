@@ -5,9 +5,6 @@
 
     <data>
         <variable
-            name="totalPrice"
-            type="Long" />
-        <variable
             name="veggie"
             type="com.example.greenosapian.database.Vegie" />
 
@@ -77,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="4dp"
                 android:text="@{veggie.name}"
@@ -99,7 +96,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 invisibleUnlessQuantity="@{veggie.quantity}"
-                android:text="@{String.format(@string/price_in_Rs, totalPrice)}"
+                android:text="@{String.format(@string/price_in_Rs, veggie.totalPrice)}"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -109,7 +106,7 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline2"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="packed"
-                tools:text="₹ 15/kg" />
+                tools:text="₹15" />
 
             <Button
                 android:id="@+id/addButton"
@@ -222,7 +219,7 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:text="@{String.format(@string/price_per_kg, veggie.price)}"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/materialCardView"

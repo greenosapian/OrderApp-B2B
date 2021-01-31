@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(entities = [Vegie::class, CartItem::class, CartHistoryEntity::class],
-    version = 7,
+    version = 8,
     exportSchema = false)
 abstract class GreenDatabase: RoomDatabase() {
 

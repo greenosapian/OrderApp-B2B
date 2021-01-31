@@ -6,10 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.greenosapian.cart.CartVegieAdapter
 import com.example.greenosapian.database.Vegie
+import com.example.greenosapian.databinding.ListItemCartBinding
 import com.example.greenosapian.databinding.ListItemVegieBinding
 
-class VegieAdapter(val clickListener: VegieListener) :
+open class VegieAdapter(val clickListener: VegieListener) :
     ListAdapter<Vegie, VegieAdapter.ViewHolder>(VegieDiffCallback()) {
 
 
@@ -48,10 +50,11 @@ class VegieAdapter(val clickListener: VegieListener) :
                         KEY_QUANTITY -> newVegie?.quantity = diffBundle.getInt(KEY_QUANTITY)
                         KEY_PRICE -> newVegie?.price = diffBundle.getLong(KEY_PRICE)
                         KEY_IMAGE_URL -> newVegie?.imageUrl = diffBundle.getString(KEY_IMAGE_URL)
+                        KEY_TOTAL_PRICE -> newVegie?.totalPrice = diffBundle.getLong(KEY_TOTAL_PRICE)
+
                     }
                 }
                 binding.veggie = newVegie
-                binding.totalPrice = newVegie?.price?.times(newVegie.quantity) ?: 0
             }
             binding.executePendingBindings()
         }
@@ -69,6 +72,8 @@ class VegieAdapter(val clickListener: VegieListener) :
         const val KEY_PRICE = "key_price"
         const val KEY_QUANTITY = "key_quantity"
         const val KEY_IMAGE_URL = "key_image_url"
+        const val KEY_TOTAL_PRICE = "key_total_price"
+
     }
 }
 
@@ -93,6 +98,9 @@ class VegieDiffCallback : DiffUtil.ItemCallback<Vegie>() {
         }
         if(oldItem.imageUrl != newItem.imageUrl){
             diffBundle.putString(VegieAdapter.KEY_IMAGE_URL, newItem.imageUrl)
+        }
+        if(oldItem.totalPrice != newItem.totalPrice){
+            diffBundle.putLong(VegieAdapter.KEY_TOTAL_PRICE, newItem.totalPrice)
         }
 
         if(diffBundle.size() == 0) return null

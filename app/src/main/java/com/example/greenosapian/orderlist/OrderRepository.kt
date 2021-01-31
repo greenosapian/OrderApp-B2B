@@ -52,17 +52,20 @@ open class OrderRepository(private val dao: com.example.greenosapian.database.Da
     suspend fun updateVeggieQuantity(id: String, quantity: Int) {
         withContext(Dispatchers.IO) {
             dao.updateVeggieQuantity(id, quantity)
+            dao.updateTotalPrice(id)
         }
     }
 
     @WorkerThread
     suspend fun increaseQuantity(id: String) = withContext(Dispatchers.IO) {
         dao.increaseQuantity(id)
+        dao.updateTotalPrice(id)
     }
 
     @WorkerThread
     suspend fun decreaseQuantity(id: String) = withContext(Dispatchers.IO) {
         dao.decreaseQuantity(id)
+        dao.updateTotalPrice(id)
     }
 
     @WorkerThread
