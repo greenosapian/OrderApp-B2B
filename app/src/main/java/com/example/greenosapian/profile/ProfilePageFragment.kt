@@ -53,8 +53,8 @@ class ProfilePageFragment : Fragment() {
         getLocation()
 
         viewModel.navigateToHomeFragment.observe(viewLifecycleOwner, Observer {
-            it?.let { userPhoneNumber->
-                this.findNavController().navigate(ProfilePageFragmentDirections.actionProfilePageFragmentToHomePageFragment(userPhoneNumber))
+            it?.let {
+                this.findNavController().navigate(ProfilePageFragmentDirections.actionProfilePageFragmentToHomePageFragment())
                 viewModel.navigationToHomeFragmentComplete()
             }
         })

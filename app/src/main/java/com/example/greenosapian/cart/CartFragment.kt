@@ -75,7 +75,7 @@ class CartFragment : Fragment() {
         viewmodel.navigateToHomePageFragment.observe(viewLifecycleOwner, Observer {
             it?.let {
                 orderPlacedDialog.dismiss()
-                this.findNavController().navigate(CartFragmentDirections.actionCartFragmentToHomePageFragment(it))
+                this.findNavController().navigate(CartFragmentDirections.actionCartFragmentToHomePageFragment())
                 viewmodel.onNavigateToHomePageCompleted()
             }
         })

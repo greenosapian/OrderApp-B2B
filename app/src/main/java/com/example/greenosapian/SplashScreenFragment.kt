@@ -53,7 +53,7 @@ class SplashScreenFragment : Fragment() {
             val phoneNumber = Firebase.auth.currentUser?.phoneNumber
             if (!phoneNumber.isNullOrEmpty() && doesUserExist(phoneNumber)) {
                 this@SplashScreenFragment.findNavController()
-                    .navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToHomePageFragment(phoneNumber!!))
+                    .navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToHomePageFragment())
             } else {
                 this@SplashScreenFragment.findNavController()
                     .navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToLanguageSelectionFragment())

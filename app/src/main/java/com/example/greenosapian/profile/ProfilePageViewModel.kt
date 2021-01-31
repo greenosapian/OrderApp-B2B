@@ -38,33 +38,26 @@ class ProfilePageViewModel(private val app: Application) : AndroidViewModel(app)
     fun insertUser(name: String, address: String, location: Location?) {
         coroutineScope.launch {
             withContext(Dispatchers.IO) {
-
-
-                val phoneNumber = Firebase.auth.currentUser?.phoneNumber
+                val phoneNumber = Firebase.auth.currentUser?.phoneNumber!!
                 val profilePicString: String? = getBase64FromUri(profilePicUri.value)
 
-                if (!phoneNumber.isNullOrEmpty()) {
-                    val response = ElasticApi.retrofitService.insertUser(
+                val response = ElasticApi.retrofitService.insertUser(
+                    phoneNumber,
+                    User(
+                        name,
+                        address,
                         phoneNumber,
-                        User(
-                            name,
-                            address,
-                            phoneNumber,
-                            UserLocation(
-                                location?.latitude?.toString() ?: "",
-                                location?.longitude?.toString() ?: ""
-                            ),
-                            profilePicString
-                        )
+                        UserLocation(
+                            location?.latitude?.toString() ?: "",
+                            location?.longitude?.toString() ?: ""
+                        ),
+                        profilePicString
                     )
-                    if (response._shards?.successful == 1) {
-                        withContext(Dispatchers.Main) {
-                            _navigateToHomeFragment.value = phoneNumber
-                        }
+                )
+                if (response._shards?.successful == 1) {
+                    withContext(Dispatchers.Main) {
+                        _navigateToHomeFragment.value = phoneNumber
                     }
-                    Log.i(TAG, "RESPONSE: ${response}")
-                } else {
-                    Log.i(TAG, "Phone number is null")
                 }
             }
         }

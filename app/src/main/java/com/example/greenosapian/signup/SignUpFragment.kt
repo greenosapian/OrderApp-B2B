@@ -148,7 +148,7 @@ class SignUpFragment : Fragment() {
             val phoneNumber = Firebase.auth.currentUser?.phoneNumber
             if (!phoneNumber.isNullOrBlank() && doesUserExist(phoneNumber)) {
                 this@SignUpFragment.findNavController()
-                    .navigate(SignUpFragmentDirections.actionSignUpFragmentToHomePageFragment(phoneNumber))
+                    .navigate(SignUpFragmentDirections.actionSignUpFragmentToHomePageFragment())
             } else {
                 this@SignUpFragment.findNavController()
                     .navigate(SignUpFragmentDirections.actionSignUpFragmentToProfilePageFragment())
